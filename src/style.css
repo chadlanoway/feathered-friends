@@ -318,12 +318,23 @@ h1 {
   position: relative;
   z-index: 4;
   min-height: 80vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   padding: 6rem 2rem;
 
   color: #17321f;
   background-color: #f5f0df;
+}
+
+.mission-logo {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0.8;
 }
 
 .content-wrapper {
