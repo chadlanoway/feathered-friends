@@ -30,7 +30,7 @@ export function renderHeader() {
         <div class="nav-links" id="main-navigation">
   <a href="./index.html">Home</a>
   <a href="./index.html#about">About</a>
-  <a href="./adoption.html">Adoption</a>
+  <a href="adoption.html">Adoption</a>
   <a href="./index.html#volunteer">Volunteer</a>
   <a href="./index.html#boarding">Boarding</a>
   <a href="./index.html#surrender">Surrender</a>
