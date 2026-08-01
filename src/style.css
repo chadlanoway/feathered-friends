@@ -111,6 +111,27 @@ body {
   transform-origin: left;
 }
 
+.nav-links .nav-donate {
+  color: white;
+  background: transparent;
+  border: 0;
+
+  text-shadow:
+    0 0 5px rgb(255 255 255 / 90%),
+    0 0 12px rgb(255 255 255 / 65%),
+    0 0 22px rgb(255 255 255 / 40%);
+}
+
+.nav-links .nav-donate:hover,
+.nav-links .nav-donate:focus-visible {
+  color: #ffdc8b;
+
+  text-shadow:
+    0 0 6px rgb(255 255 255 / 100%),
+    0 0 15px rgb(255 255 255 / 80%),
+    0 0 28px rgb(255 220 139 / 60%);
+}
+
 .menu-toggle {
   display: none;
   width: 48px;
@@ -454,5 +475,147 @@ h1 {
 
   .nav-links a:hover {
     color: #ffdc8b;
+  }
+}
+
+/* Adoption category page */
+
+.adoption-hero {
+  display: block;
+  min-height: 100svh;
+  padding:
+    calc(75px + clamp(2rem, 5vw, 5rem)) clamp(1.25rem, 5vw, 5rem) clamp(10rem, 18vw, 16rem);
+}
+
+.adoption-content {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, 100%);
+  margin-inline: auto;
+}
+
+.adoption-header {
+  max-width: 700px;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  text-align: center;
+  text-shadow: 0 3px 16px rgb(0 0 0 / 65%);
+}
+
+.adoption-header h1 {
+  max-width: none;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1;
+}
+
+.adoption-header>p:last-child {
+  margin: 1.25rem 0 0;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.category-card {
+  position: relative;
+  display: block;
+  margin-bottom: 1.25rem;
+
+  color: white;
+  text-decoration: none;
+
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 6px;
+  box-shadow: 0 18px 35px rgb(0 0 0 / 30%);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.category-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.category-card h2 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  min-width: max-content;
+  margin: 0;
+  padding: 0.9rem 1.4rem;
+
+  color: #17321f;
+  background-color: #ffcc67;
+  border: 2px solid #ffcc67;
+  border-radius: 999px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: normal;
+
+  transform: translate(-50%, 50%);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.category-card:hover h2,
+.category-card:focus-visible h2 {
+  background-color: #ffe09b;
+  border-color: #ffe09b;
+}
+
+.category-card:hover,
+.category-card:focus-visible {
+  transform: translateY(-7px);
+  box-shadow: 0 24px 45px rgb(0 0 0 / 42%);
+}
+
+.category-card:focus-visible {
+  outline: 3px solid #ffdc8b;
+  outline-offset: 5px;
+}
+
+/*
+ * Keep the foreground attached to the bottom of this taller page.
+ * The homepage version can continue using parallax.
+ */
+.adoption-hero .foreground-layer {
+  transform: scale(1.05);
+}
+
+@media (max-width: 850px) {
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 550px) {
+  .adoption-hero {
+    padding-right: 1rem;
+    padding-bottom: 9rem;
+    padding-left: 1rem;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .category-card {
+    width: min(100%, 380px);
+    margin-inline: auto;
   }
 }

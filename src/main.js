@@ -1,5 +1,8 @@
 import "./style.css";
+import "./style.css";
+import { renderHeader } from "./components/header.js";
 
+renderHeader();
 const root = document.documentElement;
 const hero = document.querySelector(".hero");
 
@@ -49,9 +52,10 @@ function handleScroll() {
   }
 }
 
-window.addEventListener("scroll", handleScroll, { passive: true });
-
-updateParallax();
+if (hero) {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  updateParallax();
+}
 
 const menuButton = document.querySelector(".menu-toggle");
 const navigation = document.querySelector(".nav-links");
