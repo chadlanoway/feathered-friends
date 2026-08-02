@@ -632,3 +632,40 @@ h1 {
 .policy-list li {
   margin-bottom: 1.25rem;
 }
+
+.about-text {
+  width: min(100%, 900px);
+  margin: 0 auto 1.5rem;
+
+  text-align: left;
+  line-height: 1.8;
+}
+
+.fixed-leaves {
+  position: fixed;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+}
+
+.fixed-leaves--top-left {
+  top: 0;
+  left: 0;
+  width: clamp(220px, 32vw, 550px);
+}
+
+.fixed-leaves--bottom-right {
+  right: 0;
+  bottom: 0;
+  width: clamp(200px, 40vw, 650px);
+}
+
+@media (max-width: 700px) {
+  .fixed-leaves--top-left {
+    width: 60vw;
+  }
+
+  .fixed-leaves--bottom-right {
+    width: 85vw;
+  }
+}
