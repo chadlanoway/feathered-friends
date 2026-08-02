@@ -9,6 +9,7 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, "index.html"),
                 adoption: resolve(__dirname, "adoption.html"),
+                about: resolve(__dirname, "about.html")
             },
         },
     },
