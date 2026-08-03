@@ -31,7 +31,7 @@ export function renderHeader() {
   <a href="./index.html">Home</a>
   <a href="about.html">About</a>
   <a href="adoption.html">Adoption</a>
-  <a href="./index.html#volunteer">Volunteer</a>
+  <a href="volunteer.html">Volunteer</a>
   <a href="./index.html#boarding">Boarding</a>
   <a href="./index.html#surrender">Surrender</a>
   <a href="./index.html#forms">Forms</a>
