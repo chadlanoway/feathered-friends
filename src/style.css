@@ -646,19 +646,19 @@ h1 {
   z-index: 10;
   pointer-events: none;
   user-select: none;
-  opacity: 0.80;
+  opacity: 0.75;
 }
 
 .fixed-leaves--top-left {
   top: 0;
   left: 0;
-  width: clamp(175px, 30vw, 500px);
+  width: clamp(175px, 30vw, 350px);
 }
 
 .fixed-leaves--bottom-right {
   right: 0;
   bottom: 0;
-  width: clamp(175px, 30vw, 500px);
+  width: clamp(175px, 30vw, 300px);
 }
 
 @media (max-width: 700px) {
