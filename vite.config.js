@@ -10,7 +10,8 @@ export default defineConfig({
                 main: resolve(__dirname, "index.html"),
                 adoption: resolve(__dirname, "adoption.html"),
                 about: resolve(__dirname, "about.html"),
-                volunteer: resolve(__dirname, "volunteer.html")
+                volunteer: resolve(__dirname, "volunteer.html"),
+
             },
         },
     },
