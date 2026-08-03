@@ -668,6 +668,7 @@ h1 {
 
   .fixed-leaves--bottom-right {
     width: 55vw;
+    bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
   }
 }
 
