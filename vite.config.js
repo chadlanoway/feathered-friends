@@ -11,7 +11,9 @@ export default defineConfig({
                 adoption: resolve(__dirname, "adoption.html"),
                 about: resolve(__dirname, "about.html"),
                 volunteer: resolve(__dirname, "volunteer.html"),
-                surrender: resolve(__dirname, "surrender.html")
+                surrender: resolve(__dirname, "surrender.html"),
+                birds: resolve(__dirname, "birds.html"),
+                bird: resolve(__dirname, "bird.html")
 
             },
         },
