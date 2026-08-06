@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Submit a parrot surrender request to Feathered Friends Sanctuary & Rescue.">
+  <title>Surrender a Parrot | Feathered Friends</title>
+</head>
+
+<body class="surrender-page-body">
+  <div id="site-header"></div>
+
+  <main class="surrender-page">
+    <header class="surrender-intro">
+      <p class="eyebrow">Surrender request</p>
+      <h1>Tell us about your parrot</h1>
+      <p>
+        Please answer each question as completely as possible. Your answers help
+        us understand your parrot's needs and determine whether Feathered Friends
+        can accept the surrender.
+      </p>
+      <div class="surrender-notice">
+        <strong>Submitting this form does not transfer ownership or guarantee acceptance.</strong>
+        A Feathered Friends representative will contact you after reviewing your request.
+      </div>
+    </header>
+
+    <form id="surrender-form" class="surrender-form" novalidate>
+      <div class="surrender-form-error" id="surrender-form-error" role="alert" tabindex="-1" hidden></div>
+
+      <label class="surrender-honeypot" aria-hidden="true">
+        Website
+        <input name="website" type="text" tabindex="-1" autocomplete="off">
+      </label>
+
+      <fieldset class="surrender-section">
+        <legend><span>1</span> Your contact information</legend>
+        <p class="section-description">How can our intake team reach you?</p>
+
+        <div class="surrender-field-grid">
+          <label class="form-field">
+            <span>Full name *</span>
+            <input name="contact.fullName" type="text" maxlength="150" autocomplete="name" required>
+          </label>
+
+          <label class="form-field">
+            <span>Email address *</span>
+            <input name="contact.email" type="email" maxlength="254" autocomplete="email" required>
+          </label>
+
+          <label class="form-field">
+            <span>Phone number *</span>
+            <input name="contact.phone" type="tel" maxlength="50" autocomplete="tel" required>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Full address *</span>
+            <textarea name="contact.fullAddress" rows="3" maxlength="500" autocomplete="street-address"
+              placeholder="House number, street, city, state and ZIP code" required></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>2</span> Parrot identification</legend>
+
+        <div class="surrender-field-grid">
+          <label class="form-field">
+            <span>Parrot's name *</span>
+            <input name="identification.parrotName" type="text" maxlength="150" required>
+          </label>
+
+          <label class="form-field">
+            <span>Species *</span>
+            <select name="identification.species" required>
+              <option value="">Choose a species</option>
+              <option value="African Grey">African Grey</option>
+              <option value="Amazon">Amazon</option>
+              <option value="Cockatiel">Cockatiel</option>
+              <option value="Cockatoo">Cockatoo</option>
+              <option value="Conure">Conure</option>
+              <option value="Macaw">Macaw</option>
+              <option value="Parakeet or Budgerigar">Parakeet or Budgerigar</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <label class="form-field form-field--wide conditional-field"
+            data-condition-field="identification.species" data-condition-value="Other" hidden>
+            <span>Please specify the species *</span>
+            <input name="identification.otherSpecies" type="text" maxlength="150"
+              data-required-when-visible>
+          </label>
+
+          <label class="form-field">
+            <span>Approximate age</span>
+            <input name="identification.approximateAge" type="text" maxlength="100">
+          </label>
+
+          <label class="form-field">
+            <span>Hatch date, if known</span>
+            <input name="identification.hatchDate" type="date">
+          </label>
+
+          <label class="form-field">
+            <span>Sex</span>
+            <select name="identification.sex">
+              <option value="unknown">Unknown</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </label>
+
+          <label class="form-field">
+            <span>Has the parrot been DNA tested?</span>
+            <select name="identification.dnaTested">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <label class="form-field">
+            <span>Is the parrot banded?</span>
+            <select name="identification.banded">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <label class="form-field conditional-field" data-condition-field="identification.banded"
+            data-condition-value="yes" hidden>
+            <span>Band number</span>
+            <input name="identification.bandNumber" type="text" maxlength="100">
+          </label>
+
+          <label class="form-field">
+            <span>Is the parrot microchipped?</span>
+            <select name="identification.microchipped">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <label class="form-field conditional-field" data-condition-field="identification.microchipped"
+            data-condition-value="yes" hidden>
+            <span>Microchip brand</span>
+            <input name="identification.microchipBrand" type="text" maxlength="100">
+          </label>
+
+          <label class="form-field">
+            <span>When did you acquire the parrot?</span>
+            <input name="identification.acquiredWhen" type="text" maxlength="150">
+          </label>
+
+          <label class="form-field">
+            <span>Where did you acquire the parrot?</span>
+            <input name="identification.acquiredWhere" type="text" maxlength="300">
+          </label>
+
+          <label class="form-field">
+            <span>How long have you owned the parrot?</span>
+            <input name="identification.ownershipLength" type="text" maxlength="150">
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Contact information for where you obtained the parrot</span>
+            <textarea name="identification.acquisitionContact" rows="3" maxlength="1000"
+              placeholder="Name, address and phone number"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>3</span> Veterinary and health information</legend>
+
+        <div class="surrender-field-grid">
+          <label class="form-field">
+            <span>Overall health</span>
+            <select name="health.overallHealth">
+              <option value="unknown">Unknown</option>
+              <option value="excellent">Excellent</option>
+              <option value="good">Good</option>
+              <option value="fair">Fair</option>
+              <option value="poor">Poor</option>
+            </select>
+          </label>
+
+          <label class="form-field">
+            <span>Has the parrot ever been to a veterinarian?</span>
+            <select name="health.seenVet">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <label class="form-field form-field--wide conditional-field" data-condition-field="health.seenVet"
+            data-condition-value="yes" hidden>
+            <span>Veterinarian contact information</span>
+            <textarea name="health.vetContact" rows="3" maxlength="1000"
+              placeholder="Name, address and phone number"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Known health issues or special needs</span>
+            <textarea name="health.healthIssues" rows="4" maxlength="5000"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Disease testing and results</span>
+            <textarea name="health.diseaseTesting" rows="4" maxlength="5000"
+              placeholder="Include diseases tested, dates and results if known"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Current medications and reasons</span>
+            <textarea name="health.medications" rows="4" maxlength="5000"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Surgeries or other medical procedures</span>
+            <textarea name="health.procedures" rows="4" maxlength="5000"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Anything else we should know about the parrot's health?</span>
+            <textarea name="health.additionalHealthInformation" rows="4" maxlength="5000"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>4</span> Diet</legend>
+
+        <div class="surrender-field-grid">
+          <label class="form-field form-field--wide">
+            <span>What do you feed the parrot?</span>
+            <textarea name="diet.currentDiet" rows="4" maxlength="3000"></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>Favorite foods</span>
+            <textarea name="diet.favoriteFoods" rows="3" maxlength="2000"></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>Foods the parrot dislikes</span>
+            <textarea name="diet.dislikedFoods" rows="3" maxlength="2000"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Known or suspected food allergies</span>
+            <textarea name="diet.foodAllergies" rows="3" maxlength="2000"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>5</span> Temperament and behavior</legend>
+
+        <div class="surrender-field-grid">
+          <label class="form-field form-field--wide">
+            <span>General temperament</span>
+            <textarea name="behavior.generalTemperament" rows="4" maxlength="5000"></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>Does the parrot have behavioral issues?</span>
+            <select name="behavior.behavioralIssues">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <label class="form-field form-field--wide conditional-field"
+            data-condition-field="behavior.behavioralIssues" data-condition-value="yes" hidden>
+            <span>Please describe the behavioral issues *</span>
+            <textarea name="behavior.behavioralIssuesDescription" rows="4" maxlength="5000"
+              data-required-when-visible></textarea>
+          </label>
+
+          <label class="form-field"><span>Comfortable being handled by family?</span><select
+              name="behavior.handledByFamily"><option value="unknown">Unknown</option><option value="yes">Yes</option><option
+                value="no">No</option></select></label>
+
+          <label class="form-field"><span>Comfortable being handled by strangers?</span><select
+              name="behavior.handledByStrangers"><option value="unknown">Unknown</option><option value="yes">Yes</option><option
+                value="no">No</option></select></label>
+
+          <label class="form-field"><span>Steps up for family?</span><select name="behavior.stepsUpForFamily"><option
+                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+
+          <label class="form-field"><span>Steps up for strangers?</span><select name="behavior.stepsUpForStrangers"><option
+                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+
+          <label class="form-field"><span>Likes being pet or scritched?</span><select name="behavior.likesPetting"><option
+                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+
+          <label class="form-field"><span>Is the parrot cage aggressive?</span><select name="behavior.cageAggressive"><option
+                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+
+          <label class="form-field"><span>Does the parrot like children?</span><select name="behavior.likesChildren"><option
+                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+
+          <label class="form-field"><span>Does the parrot like visitors?</span><select name="behavior.likesVisitors"><option
+                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+
+          <label class="form-field form-field--wide">
+            <span>Other animals in the home and how the parrot interacts with them</span>
+            <textarea name="behavior.otherAnimals" rows="4" maxlength="5000"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Known fears or dislikes</span>
+            <textarea name="behavior.fearsOrDislikes" rows="4" maxlength="5000"
+              placeholder="Examples: vacuums, brooms, loud noises, children or certain colors"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>6</span> Belongings</legend>
+
+        <div class="surrender-field-grid">
+          <label class="form-field form-field--wide">
+            <span>Can you provide any current food, toys, belongings or cage?</span>
+            <select name="belongings.itemsAvailable">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <label class="form-field form-field--wide conditional-field"
+            data-condition-field="belongings.itemsAvailable" data-condition-value="yes" hidden>
+            <span>What will be surrendered with the parrot?</span>
+            <textarea name="belongings.itemsDescription" rows="4" maxlength="5000"></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Anything else you would like us to know about the parrot?</span>
+            <textarea name="belongings.additionalInformation" rows="4" maxlength="5000"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>7</span> Surrender information</legend>
+
+        <div class="surrender-field-grid">
+          <label class="form-field form-field--wide">
+            <span>Why are you surrendering your parrot? *</span>
+            <textarea name="surrenderDetails.reasonForSurrender" rows="6" maxlength="5000" required></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Is there anything we could help with that might allow you to keep your parrot?</span>
+            <textarea name="surrenderDetails.retentionHelp" rows="5" maxlength="5000"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section surrender-agreement">
+        <legend><span>8</span> Acknowledgement</legend>
+
+        <div class="surrender-request-terms">
+          <p>
+            I certify that the information in this surrender request is accurate to the best of my knowledge. I
+            authorize Feathered Friends Sanctuary &amp; Rescue, Inc. to contact the veterinarian and other sources I
+            listed to verify information relevant to this request.
+          </p>
+          <p>
+            I understand that this is a request for review. Submitting it does not guarantee that Feathered Friends
+            will accept the parrot and does not transfer ownership of the parrot or any belongings.
+          </p>
+        </div>
+
+        <label class="agreement-checkbox">
+          <input name="agreement.accepted" type="checkbox" value="true" required>
+          <span>I have read and agree to the acknowledgement above. *</span>
+        </label>
+
+        <label class="form-field">
+          <span>Type your full legal name *</span>
+          <input name="agreement.typedName" type="text" maxlength="150" autocomplete="name" required>
+        </label>
+      </fieldset>
+
+      <div class="surrender-submit-panel">
+        <p>
+          Fields marked with an asterisk (*) are required. Please review your answers before submitting.
+        </p>
+        <button id="surrender-submit-button" class="hero-button" type="submit">
+          Submit surrender request
+        </button>
+      </div>
+    </form>
+
+    <section id="surrender-success" class="surrender-success" tabindex="-1" hidden>
+      <p class="eyebrow">Request received</p>
+      <h2>Thank you for telling us about your parrot.</h2>
+      <p>
+        Your surrender request has been submitted for review. Please save this confirmation number:
+      </p>
+      <p class="confirmation-number" id="surrender-confirmation"></p>
+      <p>A Feathered Friends representative will contact you after reviewing the information.</p>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/surrender.js"></script>
+</body>
+
+</html>

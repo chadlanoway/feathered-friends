@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Learn more about a bird available for adoption.">
+
+    <title>Meet Our Birds | Feathered Friends</title>
+</head>
+
+<body>
+    <div id="site-header"></div>
+
+    <img class="fixed-leaves fixed-leaves--top-left" src="/images/top.png" alt="" aria-hidden="true">
+
+    <img class="fixed-leaves fixed-leaves--bottom-right" src="/images/bottom.png" alt="" aria-hidden="true">
+
+    <main class="bird-detail-page">
+        <div id="bird-loading" class="birds-message" role="status">
+            Loading bird information…
+        </div>
+
+        <div id="bird-error" class="birds-message birds-error" role="alert" hidden></div>
+
+        <article id="bird-profile" class="bird-profile" hidden>
+            <div class="bird-profile-image">
+                <img id="bird-image" src="" alt="">
+            </div>
+
+            <div class="bird-profile-content">
+                <p class="eyebrow">Available for adoption</p>
+
+                <h1 id="bird-name"></h1>
+
+                <p id="bird-species" class="bird-profile-species"></p>
+
+                <dl class="bird-details">
+                    <div>
+                        <dt>Age</dt>
+                        <dd id="bird-age"></dd>
+                    </div>
+
+                    <div>
+                        <dt>Sex</dt>
+                        <dd id="bird-sex"></dd>
+                    </div>
+                </dl>
+
+                <p id="bird-short-description" class="bird-profile-introduction"></p>
+
+                <p id="bird-full-description"></p>
+
+                <a id="back-to-category" class="hero-button bird-back-button" href="./adoption.html">
+                    View more birds
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/bird.js"></script>
+</body>
+
+</html>

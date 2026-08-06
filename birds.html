@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Meet the parrots currently available for adoption.">
+
+    <title>Available Birds | Feathered Friends</title>
+</head>
+
+<body>
+    <div id="site-header"></div>
+
+    <img class="fixed-leaves fixed-leaves--top-left" src="/images/top.png" alt="" aria-hidden="true">
+
+    <img class="fixed-leaves fixed-leaves--bottom-right" src="/images/bottom.png" alt="" aria-hidden="true">
+
+    <main>
+        <section class="birds-page">
+            <header class="birds-page-header">
+                <p class="eyebrow">Meet the flock</p>
+
+                <h1 id="category-title">Available birds</h1>
+
+                <p id="category-description">
+                    Meet the birds currently available for adoption.
+                </p>
+
+                <a class="back-link" href="./adoption.html">
+                    ← Choose another category
+                </a>
+            </header>
+
+            <div id="birds-loading" class="birds-message" role="status">
+                Loading birds…
+            </div>
+
+            <div id="birds-error" class="birds-message birds-error" role="alert" hidden></div>
+
+            <div id="birds-grid" class="birds-grid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/birds.js"></script>
+</body>
+
+</html>

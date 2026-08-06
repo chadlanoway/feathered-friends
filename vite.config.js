@@ -11,6 +11,7 @@ export default defineConfig({
                 adoption: resolve(__dirname, "adoption.html"),
                 about: resolve(__dirname, "about.html"),
                 volunteer: resolve(__dirname, "volunteer.html"),
+                surrender: resolve(__dirname, "surrender.html")
 
             },
         },

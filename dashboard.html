@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Dashboard | Feathered Friends</title>
+</head>
+
+<body class="dashboard-body">
+    <main class="dashboard-shell">
+        <section id="login-panel">
+            <p class="eyebrow">Feathered Friends</p>
+            <h1>Dashboard sign in</h1>
+
+            <form id="login-form">
+                <label>
+                    Email
+                    <input id="login-email" type="email" autocomplete="username" required>
+                </label>
+
+                <label>
+                    Password
+                    <input id="login-password" type="password" autocomplete="current-password" required>
+                </label>
+
+                <button class="hero-button" type="submit">
+                    Sign in
+                </button>
+            </form>
+
+            <p id="login-message" role="alert"></p>
+        </section>
+
+        <section id="new-password-panel" hidden>
+            <h1>Choose a new password</h1>
+
+            <form id="new-password-form">
+                <label>
+                    New password
+                    <input id="new-password" type="password" autocomplete="new-password" required>
+                </label>
+
+                <button class="hero-button" type="submit">
+                    Save password
+                </button>
+            </form>
+
+            <p id="password-message" role="alert"></p>
+        </section>
+
+        <section id="dashboard-panel" hidden>
+            <header class="site-header dashboard-console-header">
+                <nav class="navbar" aria-label="Management console navigation">
+                    <div class="site-logo">
+                        <span class="logo-name">Feathered Friends</span>
+                        <span class="logo-tagline">Management Console</span>
+                    </div>
+
+                    <button id="dashboard-menu-toggle" class="menu-toggle" type="button"
+                        aria-label="Open navigation menu" aria-expanded="false" aria-controls="dashboard-navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <div id="dashboard-navigation" class="nav-links dashboard-navigation">
+                        <a class="dashboard-nav-link is-active" href="#birds" data-dashboard-section="birds">
+                            Birds
+                        </a>
+
+                        <a class="dashboard-nav-link" href="#boarding" data-dashboard-section="boarding">
+                            Boarding
+                        </a>
+
+                        <a class="dashboard-nav-link" href="#volunteers" data-dashboard-section="volunteers">
+                            Volunteers
+                        </a>
+
+                        <a class="dashboard-nav-link" href="#adoptions" data-dashboard-section="adoptions">
+                            Adoptions
+                        </a>
+
+                        <a class="dashboard-nav-link" href="#surrenders" data-dashboard-section="surrenders">
+                            Surrenders
+                        </a>
+
+                        <button id="sign-out-button" class="dashboard-sign-out" type="button">
+                            Sign out
+                        </button>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="dashboard-content">
+                <section id="dashboard-section-birds" class="dashboard-section" data-dashboard-panel="birds">
+                    <header class="dashboard-section-header">
+                        <div>
+                            <p class="eyebrow">Bird management</p>
+                            <h1>Birds</h1>
+                            <p>
+                                Add birds and control which profiles appear
+                                on the public website.
+                            </p>
+                        </div>
+
+                        <button id="add-bird-button" class="hero-button" type="button">
+                            Add a bird
+                        </button>
+                    </header>
+
+                    <section id="bird-form-panel" class="bird-form-panel" aria-labelledby="bird-form-title" hidden>
+                        <header class="bird-form-header">
+                            <div>
+                                <p class="eyebrow">New profile</p>
+                                <h2 id="bird-form-title">Add a bird</h2>
+                                <p>
+                                    Save the bird as an unpublished draft.
+                                    Photos can be added afterward.
+                                </p>
+                            </div>
+                        </header>
+
+                        <form id="create-bird-form">
+                            <div class="bird-form-grid">
+                                <label class="form-field">
+                                    <span>Name *</span>
+                                    <input id="bird-name" name="birdName" type="text" maxlength="100" autocomplete="off"
+                                        required>
+                                </label>
+
+                                <label class="form-field">
+                                    <span>Category *</span>
+                                    <select name="category" required>
+                                        <option value="">Choose a category</option>
+                                        <option value="african-greys">
+                                            African Greys
+                                        </option>
+                                        <option value="amazons">Amazons</option>
+                                        <option value="cockatiels">Cockatiels</option>
+                                        <option value="cockatoos">Cockatoos</option>
+                                        <option value="conures">Conures</option>
+                                        <option value="macaws">Macaws</option>
+                                        <option value="parakeets">Parakeets</option>
+                                        <option value="others">Other Parrots</option>
+                                    </select>
+                                </label>
+
+                                <label class="form-field">
+                                    <span>Species *</span>
+                                    <input name="species" type="text" maxlength="120" required>
+                                </label>
+
+                                <label class="form-field">
+                                    <span>Age</span>
+                                    <input name="ageText" type="text" maxlength="60"
+                                        placeholder="Example: Approximately 12 years">
+                                </label>
+
+                                <label class="form-field">
+                                    <span>Sex *</span>
+                                    <select name="sex" required>
+                                        <option value="">Choose an option</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="unknown">Unknown</option>
+                                    </select>
+                                </label>
+
+                                <label class="form-field form-field--wide">
+                                    <span>Photo *</span>
+
+                                    <input id="bird-photo" name="birdPhoto" type="file" accept="image/*"
+                                        capture="environment" required>
+
+                                    <small class="form-help">
+                                        Take a new photo or choose one from your device.
+                                        Maximum file size: 25 MB.
+                                    </small>
+                                </label>
+
+                                <label class="form-field form-field--wide">
+                                    <span>Short description *</span>
+                                    <textarea name="shortDescription" rows="3" maxlength="300"
+                                        placeholder="A short introduction for the thumbnail card." required></textarea>
+                                </label>
+
+                                <label class="form-field form-field--wide">
+                                    <span>Full description *</span>
+                                    <textarea name="fullDescription" rows="8" maxlength="5000"
+                                        placeholder="The bird's complete adoption description." required></textarea>
+                                </label>
+                            </div>
+
+                            <p id="bird-form-message" role="alert"></p>
+
+                            <div class="bird-form-actions">
+                                <button id="cancel-bird-button" class="form-secondary-button" type="button">
+                                    Cancel
+                                </button>
+
+                                <button id="save-bird-button" class="hero-button" type="submit">
+                                    Save draft
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <p id="dashboard-message" role="status">
+                        Loading birds…
+                    </p>
+
+                    <div class="dashboard-table-wrapper">
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Bird</th>
+                                    <th>Category</th>
+                                    <th>Species</th>
+                                    <th>Website visibility</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="dashboard-birds"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="dashboard-section-boarding" class="dashboard-section" data-dashboard-panel="boarding"
+                    hidden>
+                    <div class="dashboard-placeholder">
+                        <p class="eyebrow">Boarding management</p>
+                        <h1>Boarding</h1>
+                        <p>
+                            Boarding requests and intake information will
+                            appear here.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="dashboard-section-volunteers" class="dashboard-section" data-dashboard-panel="volunteers"
+                    hidden>
+                    <div class="dashboard-placeholder">
+                        <p class="eyebrow">Volunteer management</p>
+                        <h1>Volunteers</h1>
+                        <p>
+                            Volunteer applications and records will appear here.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="dashboard-section-adoptions" class="dashboard-section" data-dashboard-panel="adoptions"
+                    hidden>
+                    <div class="dashboard-placeholder">
+                        <p class="eyebrow">Application management</p>
+                        <h1>Adoptions</h1>
+                        <p>
+                            Adoption applications and their current status
+                            will appear here.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="dashboard-section-surrenders" class="dashboard-section" data-dashboard-panel="surrenders"
+                    hidden>
+                    <header class="dashboard-section-header surrender-dashboard-header">
+                        <div>
+                            <p class="eyebrow">Intake management</p>
+                            <h1>Surrenders</h1>
+                            <p>Review surrender requests submitted through the public website.</p>
+                        </div>
+
+                        <div class="submission-filters" aria-label="Surrender request filters">
+                            <button class="submission-filter is-active" type="button" data-surrender-view="unreviewed"
+                                aria-pressed="true">
+                                Unreviewed
+                            </button>
+                            <button class="submission-filter" type="button" data-surrender-view="all"
+                                aria-pressed="false">
+                                All
+                            </button>
+                        </div>
+                    </header>
+
+                    <p id="surrender-dashboard-message" class="submission-message" role="status">
+                        Select Surrenders to load requests.
+                    </p>
+
+                    <div class="dashboard-table-wrapper" id="surrender-table-wrapper" hidden>
+                        <table class="dashboard-table surrender-table">
+                            <thead>
+                                <tr>
+                                    <th>Submitted</th>
+                                    <th>Applicant</th>
+                                    <th>Bird</th>
+                                    <th>Species</th>
+                                    <th>Review</th>
+                                    <th>Decision</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-surrenders"></tbody>
+                        </table>
+                    </div>
+
+                    <section id="surrender-detail-panel" class="submission-detail-panel" aria-labelledby="surrender-detail-title"
+                        hidden>
+                        <header class="submission-detail-header">
+                            <div>
+                                <p class="eyebrow">Surrender request</p>
+                                <h2 id="surrender-detail-title">Submission details</h2>
+                                <p id="surrender-detail-id" class="submission-detail-id"></p>
+                            </div>
+                            <button id="close-surrender-detail" class="form-secondary-button" type="button">
+                                Close details
+                            </button>
+                        </header>
+                        <div id="surrender-detail-content"></div>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="/src/dashboard.js"></script>
+</body>
+
+</html>
