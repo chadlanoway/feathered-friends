@@ -2138,3 +2138,149 @@ h1 {
   margin: 1.5rem auto 0;
   text-shadow: none;
 }
+
+#bird-photo {
+  width: 100%;
+  padding: 0.65rem;
+  color: #17321f;
+  background: #fffdf5;
+  border: 1px solid rgb(23 50 31 / 30%);
+  border-radius: 12px;
+  font: inherit;
+}
+
+#bird-photo::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.75rem 1.25rem;
+
+  color: #17321f;
+  background-color: #ffcc67;
+  border: 2px solid #ffcc67;
+  border-radius: 999px;
+
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+#bird-photo::file-selector-button:hover {
+  background-color: #ffe09b;
+  transform: translateY(-2px);
+}
+
+.volunteer-availability {
+  overflow: hidden;
+  margin-top: 0.75rem;
+  border: 1px solid rgb(23 50 31 / 22%);
+  border-radius: 14px;
+  background: rgb(255 253 245 / 72%);
+}
+
+.availability-heading,
+.availability-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(160px, 1fr) minmax(140px, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.availability-heading {
+  color: white;
+  background: #173b25;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.availability-row+.availability-row {
+  border-top: 1px solid rgb(23 50 31 / 14%);
+}
+
+.availability-row>span {
+  font-weight: 750;
+}
+
+.availability-row label,
+.volunteer-choice-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  cursor: pointer;
+}
+
+.availability-row input,
+.volunteer-choice-list input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.1rem 0 0;
+  flex: 0 0 auto;
+  accent-color: #197451;
+}
+
+.volunteer-section-spacing {
+  margin-top: 1.5rem;
+}
+
+.volunteer-choice-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.volunteer-choice-list label {
+  padding: 0.9rem 1rem;
+  color: #17321f;
+  background: rgb(255 253 245 / 76%);
+  border: 1px solid rgb(23 50 31 / 18%);
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
+.volunteer-choice-list label:hover {
+  background: #fffdf5;
+  border-color: rgb(25 116 81 / 50%);
+}
+
+.volunteer-legal-terms {
+  max-height: 26rem;
+  overflow-y: auto;
+}
+
+.volunteer-legal-terms ol {
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.4rem;
+}
+
+.volunteer-legal-terms li {
+  margin-bottom: 0.45rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 700px) {
+  .availability-heading {
+    display: none;
+  }
+
+  .availability-row {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 1rem;
+  }
+
+  .availability-row>span {
+    margin-bottom: 0.15rem;
+    font-size: 1.05rem;
+  }
+
+  .availability-row label {
+    padding: 0.55rem 0.65rem;
+    background: rgb(23 50 31 / 5%);
+    border-radius: 8px;
+  }
+}

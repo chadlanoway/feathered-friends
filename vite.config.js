@@ -16,6 +16,7 @@ export default defineConfig({
                 bird: resolve(__dirname, "bird.html"),
                 adoptionForm: resolve(__dirname, "adoption-form.html"),
                 dashboard: resolve(__dirname, "dashboard.html"),
+                volunteerForm: resolve(__dirname, "volunteer-form.html"),
 
             },
         },

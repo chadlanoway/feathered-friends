@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply to volunteer with Feathered Friends Sanctuary & Rescue.">
+  <title>Volunteer Application | Feathered Friends</title>
+</head>
+
+<body class="surrender-page-body">
+  <div id="site-header"></div>
+
+  <main class="surrender-page">
+    <header class="surrender-intro">
+      <p class="eyebrow">Volunteer application</p>
+      <h1>Join the flock</h1>
+      <p>
+        Thank you for your interest in volunteering at Feathered Friends Sanctuary &amp; Rescue.
+        Your answers will help us match you with volunteer opportunities that fit your interests and experience.
+      </p>
+      <div class="surrender-notice">
+        <strong>Following a review of your application, a Feathered Friends representative will contact you.</strong>
+        Please complete all required questions and review each agreement carefully.
+      </div>
+    </header>
+
+    <form id="volunteer-form" class="surrender-form" novalidate>
+      <div class="surrender-form-error" id="volunteer-form-error" role="alert" tabindex="-1" hidden></div>
+
+      <label class="surrender-honeypot" aria-hidden="true">
+        Website
+        <input name="website" type="text" tabindex="-1" autocomplete="off">
+      </label>
+
+      <fieldset class="surrender-section">
+        <legend><span>1</span> Volunteer applicant information</legend>
+        <p class="section-description">How can our volunteer coordinator reach you?</p>
+
+        <div class="surrender-field-grid">
+          <label class="form-field">
+            <span>Full name *</span>
+            <input name="contact.fullName" type="text" maxlength="150" autocomplete="name" required>
+          </label>
+
+          <label class="form-field">
+            <span>Email address *</span>
+            <input name="contact.email" type="email" maxlength="254" autocomplete="email" required>
+          </label>
+
+          <label class="form-field">
+            <span>Phone number *</span>
+            <input name="contact.phone" type="tel" maxlength="50" autocomplete="tel" required>
+          </label>
+
+          <label class="form-field">
+            <span>Date of birth *</span>
+            <input id="volunteer-date-of-birth" name="contact.dateOfBirth" type="date" autocomplete="bday" required>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Full address *</span>
+            <textarea name="contact.fullAddress" rows="3" maxlength="500" autocomplete="street-address"
+              placeholder="House number, street, city, state and ZIP code" required></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>Do you intend to have minor children volunteer with you? *</span>
+            <select name="children.volunteering" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="maybe">Maybe, possibly on occasion</option>
+            </select>
+          </label>
+
+          <label class="form-field form-field--wide conditional-field"
+            data-condition-field="children.volunteering" data-condition-values="yes,maybe" hidden>
+            <span>Names and ages of the minor children *</span>
+            <textarea name="children.namesAndAges" rows="4" maxlength="2000"
+              data-required-when-visible></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>2</span> Availability and experience</legend>
+
+        <div class="form-field form-field--wide">
+          <span>What days are you generally available for volunteering? *</span>
+          <p class="section-description">Choose one option for each day.</p>
+
+          <div class="volunteer-availability" role="group" aria-label="Weekly volunteer availability">
+            <div class="availability-heading" aria-hidden="true">
+              <span>Day</span><span>Morning, 10 AM-12 PM</span><span>Not available</span>
+            </div>
+
+            <div class="availability-row">
+              <span>Monday</span>
+              <label><input type="radio" name="availability.monday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.monday" value="unavailable" required><span>Not available</span></label>
+            </div>
+            <div class="availability-row">
+              <span>Tuesday</span>
+              <label><input type="radio" name="availability.tuesday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.tuesday" value="unavailable" required><span>Not available</span></label>
+            </div>
+            <div class="availability-row">
+              <span>Wednesday</span>
+              <label><input type="radio" name="availability.wednesday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.wednesday" value="unavailable" required><span>Not available</span></label>
+            </div>
+            <div class="availability-row">
+              <span>Thursday</span>
+              <label><input type="radio" name="availability.thursday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.thursday" value="unavailable" required><span>Not available</span></label>
+            </div>
+            <div class="availability-row">
+              <span>Friday</span>
+              <label><input type="radio" name="availability.friday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.friday" value="unavailable" required><span>Not available</span></label>
+            </div>
+            <div class="availability-row">
+              <span>Saturday</span>
+              <label><input type="radio" name="availability.saturday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.saturday" value="unavailable" required><span>Not available</span></label>
+            </div>
+            <div class="availability-row">
+              <span>Sunday</span>
+              <label><input type="radio" name="availability.sunday" value="morning" required><span>Morning</span></label>
+              <label><input type="radio" name="availability.sunday" value="unavailable" required><span>Not available</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="surrender-field-grid volunteer-section-spacing">
+          <label class="form-field form-field--wide">
+            <span>Do you have prior experience with parrots or other birds? Please describe. *</span>
+            <textarea name="experience.birdExperience" rows="5" maxlength="5000" required></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Do you currently have parrots? If yes, how many and what kind? *</span>
+            <textarea name="experience.currentParrots" rows="4" maxlength="3000"
+              placeholder="Type No if you do not currently have parrots" required></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>Comfort level handling parrots *</span>
+            <select name="experience.handlingComfort" required>
+              <option value="">Choose one</option>
+              <option value="1">1 - Not comfortable at all</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very comfortable</option>
+            </select>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Have you volunteered at other shelters or rescues? If yes, where? *</span>
+            <textarea name="experience.otherOrganizations" rows="4" maxlength="3000"
+              placeholder="Type No if not applicable" required></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>What is your primary motivation for volunteering with Feathered Friends? *</span>
+            <textarea name="experience.motivation" rows="5" maxlength="5000" required></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>Are you comfortable with cleaning, maintenance and extended periods on your feet? *</span>
+            <select name="experience.physicalTasksComfort" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>3</span> Volunteer interests</legend>
+
+        <div class="form-field form-field--wide">
+          <span>Which tasks would you feel comfortable doing? Select all that apply. *</span>
+          <div class="volunteer-choice-list" id="volunteer-task-options">
+            <label><input name="tasks.selected" type="checkbox" value="food-and-water"><span><strong>Food and water:</strong> Provide birds with fresh food and water.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="cage-cleaning"><span><strong>Cage cleaning:</strong> Wipe cages, scrape grates and perches, and change papers.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="general-maintenance"><span><strong>General maintenance:</strong> Sweep, mop, wipe walls and dust.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="special-maintenance"><span><strong>Special maintenance:</strong> Lawn care, building repair, plumbing or electrical work.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="toy-making"><span><strong>Toy making:</strong> Make toys, organize toy parts and maintain inventory.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="public-education"><span><strong>Public education:</strong> Help at education events and teach the public about FFSR.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="special-events"><span><strong>Special events:</strong> Help with fundraising and community events.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="veterinary-care"><span><strong>Veterinary care:</strong> I am a licensed area veterinarian interested in donating services.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="administrative"><span><strong>Administrative:</strong> Charting, data collection and office duties.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="other"><span><strong>Other</strong></span></label>
+          </div>
+        </div>
+
+        <div class="surrender-field-grid volunteer-section-spacing">
+          <label class="form-field form-field--wide conditional-field"
+            data-checkbox-condition="tasks.selected" data-condition-value="other" hidden>
+            <span>Describe the other tasks you are interested in *</span>
+            <textarea name="tasks.other" rows="4" maxlength="3000" data-required-when-visible></textarea>
+          </label>
+
+          <label class="form-field form-field--wide">
+            <span>Additional information about you or your experience *</span>
+            <textarea name="additional.information" rows="5" maxlength="5000" required></textarea>
+          </label>
+
+          <label class="form-field">
+            <span>How did you hear about us? *</span>
+            <select name="additional.referralSource" required>
+              <option value="">Choose one</option>
+              <option value="social-media">Social media</option>
+              <option value="website">Website</option>
+              <option value="friend-family">Friend or family</option>
+              <option value="community-event">Community event</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section surrender-agreement">
+        <legend><span>4</span> Waiver of Liability and Hold Harmless Agreement</legend>
+
+        <div class="surrender-request-terms volunteer-legal-terms">
+          <p>
+            I hereby release, waive, discharge, and covenant not to sue Feathered Friends Sanctuary &amp; Rescue Inc.,
+            their officers and volunteers (hereinafter referred to as Releasees) from any and all liability, claims,
+            demands, actions, and causes of action whatsoever arising out of or related to any loss, damage, or injury,
+            including death, that may be sustained by me, my child(ren), my bird(s), or any property belonging to me
+            or us, while visiting the Sanctuary, volunteering for the Sanctuary, attending trim sessions at the
+            Sanctuary, and/or handling birds for the Sanctuary. I will not hold Feathered Friends Sanctuary &amp;
+            Rescue, Inc. liable for any damage, illness, or injury sustained during volunteer work, either on the
+            premises of the Sanctuary or at another location with the Sanctuary.
+          </p>
+          <p>
+            It is understood that this waiver and agreement shall bind the members of my family, including minor
+            children and spouse if I am alive, and my heirs, assignees, and personal representatives if I am deceased,
+            and shall be deemed as a release, waive, discharge, and covenant not to sue the above named releasees. I
+            hereby further agree that this waiver of liability and hold harmless agreement shall be construed in
+            accordance with the laws of the State of Wisconsin.
+          </p>
+          <p>
+            In signing this release, I acknowledge that I have read and understand the foregoing Waiver of Liability
+            and Hold Harmless Agreement and I sign it voluntarily as my own free act and deed; no oral representations,
+            statements or inducements, apart from the foregoing written agreements have been made; and I execute this
+            release for full, adequate and complete consideration fully intending to be bound by the same.
+          </p>
+        </div>
+
+        <label class="agreement-checkbox">
+          <input name="liability.accepted" type="checkbox" value="true" required>
+          <span>I have read and agree to the Waiver of Liability and Hold Harmless Agreement. *</span>
+        </label>
+
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Type your full legal name *</span><input name="liability.typedName" type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date" name="liability.date" type="date" required></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section surrender-agreement">
+        <legend><span>5</span> Volunteer Confidentiality Agreement</legend>
+
+        <div class="surrender-request-terms volunteer-legal-terms">
+          <p>
+            I, the undersigned, understand and agree that I must maintain and safeguard the confidentiality of
+            information I may obtain through my activities as a Feathered Friends Sanctuary &amp; Rescue, Inc.
+            volunteer. Confidentiality is a critical ethical issue in volunteer relationships.
+          </p>
+          <p>
+            Volunteers are involved in relations with people surrendering their birds during difficult times. These
+            families have a right to expect their experiences and decisions will be kept strictly private and
+            confidential. A trusting relationship honoring an individual's right to privacy is necessary for
+            surrendering parties to feel safe and comfortable in expressing his or her true feelings and concerns.
+            Any and all personal information must be held in the utmost confidence.
+          </p>
+          <p>
+            I agree not to divulge, publish, or otherwise make known to unauthorized persons or to the public any
+            identifiable, personal information which is obtained in the course of my service as a volunteer.
+          </p>
+          <p>
+            I understand that the surrendering party's written authorization is required for me to disclose any such
+            information, and that this authorization must be obtained with an official Feathered Friends Sanctuary
+            &amp; Rescue, Inc. release form. Volunteers are not to discuss or disclose confidential information
+            concerning surrendering parties in circumstances where an unauthorized person may overhear the conversation.
+          </p>
+          <p>Confidential information includes:</p>
+          <ol>
+            <li>Data or information which identifies a surrendering party or family.</li>
+            <li>Assessment forms, referral forms and computer records.</li>
+            <li>Information received verbally from the surrendering party.</li>
+            <li>Admission to or use of any veterinary care services, and all information and records compiled,
+              obtained, or maintained by veterinary care workers and by me in the course of providing services.</li>
+            <li>Any fundraising ideas, proposals, or upcoming project unless specifically instructed to do so by a
+              Feathered Friends Sanctuary &amp; Rescue, Inc. Board of Directors officer.</li>
+            <li>No talking to press, under any circumstances without prior approval.</li>
+            <li>Any personal information I obtain regarding any of the other volunteers, including the Board of Directors.</li>
+          </ol>
+          <p>
+            I recognize that unauthorized release of confidential information may result in legal penalties including
+            possible fines or lawsuits by a surrendering party or family. As a Feathered Friends Sanctuary &amp;
+            Rescue, Inc. volunteer, I understand that I may be terminated if I disclose confidential information
+            without the surrendering party's written authorization or without the authorization of a member of the
+            Board of Directors. I understand and agree to the above policy, and I am aware that a breach of
+            confidentiality will be grounds for dismissal in my role as a volunteer.
+          </p>
+        </div>
+
+        <label class="agreement-checkbox">
+          <input name="confidentiality.accepted" type="checkbox" value="true" required>
+          <span>I have read and agree to the Volunteer Confidentiality Agreement. *</span>
+        </label>
+
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Type your full legal name *</span><input name="confidentiality.typedName" type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date" name="confidentiality.date" type="date" required></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section surrender-agreement">
+        <legend><span>6</span> Media Release</legend>
+
+        <div class="surrender-request-terms volunteer-legal-terms">
+          <p>
+            I grant permission to Feathered Friends Sanctuary &amp; Rescue, hereinafter known as the "Media," to use
+            my image (photographs and/or video) for use in Media publications including but not limited to videos,
+            email blasts, newsletters, general publications, websites and/or affiliates (social media). I hereby
+            waive any right to inspect or approve the finished photographs or electronic matter that may be used in
+            conjunction with them now or in the future, whether that use is known to me or unknown, and I waive any
+            right to royalties or other compensation arising from or related to the use of the image.
+          </p>
+        </div>
+
+        <label class="agreement-checkbox">
+          <input name="mediaRelease.accepted" type="checkbox" value="true" required>
+          <span>I have read and agree to the Media Release. *</span>
+        </label>
+
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Type your full legal name *</span><input name="mediaRelease.typedName" type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date" name="mediaRelease.date" type="date" required></label>
+        </div>
+      </fieldset>
+
+      <div class="surrender-submit-panel">
+        <p>Fields marked with an asterisk (*) are required. Please review your answers before submitting.</p>
+        <button id="volunteer-submit-button" class="hero-button" type="submit">Submit volunteer application</button>
+      </div>
+    </form>
+
+    <section id="volunteer-success" class="surrender-success" tabindex="-1" hidden>
+      <p class="eyebrow">Application received</p>
+      <h2>Thank you for offering your time.</h2>
+      <p>Your volunteer application has been submitted for review. Please save this confirmation number:</p>
+      <p class="confirmation-number" id="volunteer-confirmation"></p>
+      <p>A Feathered Friends representative will contact you to discuss next steps.</p>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/volunteer-form.js"></script>
+</body>
+
+</html>

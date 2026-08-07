@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Apply to adopt a parrot from Feathered Friends Sanctuary & Rescue.">
+  <link rel="stylesheet" href="/src/style.css">
   <title>Adoption Application | Feathered Friends</title>
 </head>
 
@@ -51,13 +52,13 @@
           </label>
           <label class="form-field">
             <span>State *</span>
-            <input name="contact.state" type="text" maxlength="2" autocomplete="address-level1"
-              placeholder="WI" required>
+            <input name="contact.state" type="text" maxlength="2" autocomplete="address-level1" placeholder="WI"
+              required>
           </label>
           <label class="form-field">
             <span>ZIP code *</span>
-            <input name="contact.zipCode" type="text" maxlength="10" autocomplete="postal-code"
-              inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" placeholder="53534" required>
+            <input name="contact.zipCode" type="text" maxlength="10" autocomplete="postal-code" inputmode="numeric"
+              pattern="[0-9]{5}(-[0-9]{4})?" placeholder="53534" required>
           </label>
           <label class="form-field">
             <span>Email address *</span>
@@ -90,7 +91,9 @@
           <label class="form-field">
             <span>Are you 18 years or older? *</span>
             <select name="applicant.isAtLeast18" required>
-              <option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
             </select>
           </label>
           <label class="form-field">
@@ -110,21 +113,30 @@
           <label class="form-field">
             <span>What type of residence do you live in? *</span>
             <select name="residence.residenceType" required>
-              <option value="">Choose one</option><option value="house">House</option><option value="apartment">Apartment</option>
-              <option value="condo">Condominium</option><option value="mobile-home">Mobile home</option><option value="other">Other</option>
+              <option value="">Choose one</option>
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="condo">Condominium</option>
+              <option value="mobile-home">Mobile home</option>
+              <option value="other">Other</option>
             </select>
           </label>
           <label class="form-field">
             <span>Do you own or rent your home? *</span>
             <select name="residence.ownershipStatus" required>
-              <option value="">Choose one</option><option value="own">Own</option><option value="rent">Rent</option><option value="other">Other</option>
+              <option value="">Choose one</option>
+              <option value="own">Own</option>
+              <option value="rent">Rent</option>
+              <option value="other">Other</option>
             </select>
           </label>
           <label class="form-field form-field--wide conditional-field" data-condition-field="residence.ownershipStatus"
             data-condition-value="rent" hidden>
             <span>Do you have landlord approval to have a parrot? *</span>
             <select name="residence.landlordApproval" data-required-when-visible>
-              <option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
             </select>
           </label>
           <label class="form-field">
@@ -133,7 +145,8 @@
           </label>
           <label class="form-field form-field--wide">
             <span>Other adults' full names and dates of birth *</span>
-            <textarea name="residence.otherAdults" rows="4" maxlength="2000" placeholder="Type N/A if not applicable" required></textarea>
+            <textarea name="residence.otherAdults" rows="4" maxlength="2000" placeholder="Type N/A if not applicable"
+              required></textarea>
           </label>
           <label class="form-field">
             <span>How many children live in your household? *</span>
@@ -141,36 +154,63 @@
           </label>
           <label class="form-field form-field--wide">
             <span>Ages of the children *</span>
-            <textarea name="residence.childrenAges" rows="3" maxlength="1000" placeholder="Type N/A if not applicable" required></textarea>
+            <textarea name="residence.childrenAges" rows="3" maxlength="1000" placeholder="Type N/A if not applicable"
+              required></textarea>
           </label>
           <label class="form-field">
             <span>Would you permit a pre-adoption home inspection? *</span>
-            <select name="household.preAdoptionInspection" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="household.preAdoptionInspection" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field">
             <span>Would you allow a post-adoption home visit? *</span>
-            <select name="household.postAdoptionVisit" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="household.postAdoptionVisit" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field form-field--wide">
-            <span>Has anyone in the household ever been charged with or convicted of animal abuse, animal neglect or domestic violence? *</span>
-            <select name="household.abuseNeglectViolenceHistory" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <span>Has anyone in the household ever been charged with or convicted of animal abuse, animal neglect or
+              domestic violence? *</span>
+            <select name="household.abuseNeglectViolenceHistory" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field">
             <span>Do all household members know you plan to adopt a bird? *</span>
-            <select name="household.everyoneAware" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="household.everyoneAware" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field">
             <span>Does anyone in the household have asthma or allergies? *</span>
-            <select name="household.allergiesOrAsthma" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="household.allergiesOrAsthma" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
-          <label class="form-field form-field--wide conditional-field" data-condition-field="household.allergiesOrAsthma"
-            data-condition-value="yes" hidden>
+          <label class="form-field form-field--wide conditional-field"
+            data-condition-field="household.allergiesOrAsthma" data-condition-value="yes" hidden>
             <span>Please explain the allergies or asthma *</span>
-            <textarea name="household.allergyExplanation" rows="4" maxlength="3000" data-required-when-visible></textarea>
+            <textarea name="household.allergyExplanation" rows="4" maxlength="3000"
+              data-required-when-visible></textarea>
           </label>
           <label class="form-field">
             <span>Does anyone smoke or vape in your home? *</span>
-            <select name="household.smokingOrVaping" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="household.smokingOrVaping" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field">
             <span>Who will be the parrot's primary caregiver? *</span>
@@ -184,7 +224,11 @@
         <div class="surrender-field-grid">
           <label class="form-field">
             <span>Do you currently have other pets? *</span>
-            <select name="pets.hasOtherPets" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="pets.hasOtherPets" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field form-field--wide conditional-field" data-condition-field="pets.hasOtherPets"
             data-condition-value="yes" hidden>
@@ -193,11 +237,13 @@
           </label>
           <label class="form-field form-field--wide">
             <span>Primary veterinarian's name, address and phone number *</span>
-            <textarea name="pets.veterinarian" rows="4" maxlength="2000" placeholder="Type N/A if you do not currently have a veterinarian" required></textarea>
+            <textarea name="pets.veterinarian" rows="4" maxlength="2000"
+              placeholder="Type N/A if you do not currently have a veterinarian" required></textarea>
           </label>
           <label class="form-field form-field--wide">
             <span>If you have other birds, how would you quarantine this bird? *</span>
-            <textarea name="pets.quarantinePlan" rows="5" maxlength="5000" placeholder="Type N/A if you do not have other birds" required></textarea>
+            <textarea name="pets.quarantinePlan" rows="5" maxlength="5000"
+              placeholder="Type N/A if you do not have other birds" required></textarea>
           </label>
         </div>
       </fieldset>
@@ -209,8 +255,12 @@
           <label class="form-field">
             <span>What size parrot are you interested in? *</span>
             <select name="adoptionInterest.preferredParrotSize" required>
-              <option value="">Choose one</option><option value="small">Small</option><option value="medium">Medium</option>
-              <option value="large">Large</option><option value="extra-large">Extra large</option><option value="open">Open to any size</option>
+              <option value="">Choose one</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+              <option value="extra-large">Extra large</option>
+              <option value="open">Open to any size</option>
             </select>
           </label>
           <label class="form-field">
@@ -234,7 +284,8 @@
           <label class="form-field form-field--wide">
             <span>Under what circumstances would you be unable to keep the bird? *</span>
             <textarea name="adoptionInterest.unableToKeepCircumstances" rows="6" maxlength="5000"
-              placeholder="Consider divorce, a new baby, a new job, allergies, relationships, the bird preferring one person, or other life changes" required></textarea>
+              placeholder="Consider divorce, a new baby, a new job, allergies, relationships, the bird preferring one person, or other life changes"
+              required></textarea>
           </label>
         </div>
       </fieldset>
@@ -244,11 +295,19 @@
         <div class="surrender-field-grid">
           <label class="form-field">
             <span>Are you aware of the financial commitment of parrot ownership? *</span>
-            <select name="commitment.financialCommitment" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="commitment.financialCommitment" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field">
             <span>Are you aware that your bird could outlive you? *</span>
-            <select name="commitment.mayOutliveApplicant" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
+            <select name="commitment.mayOutliveApplicant" required>
+              <option value="">Choose one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </label>
           <label class="form-field form-field--wide">
             <span>What plans have you made for the bird's long-term care? *</span>
@@ -261,8 +320,11 @@
           <label class="form-field">
             <span>How would you rate your knowledge of parrot care? *</span>
             <select name="commitment.knowledgeLevel" required>
-              <option value="">Choose one</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option><option value="expert">Expert</option>
+              <option value="">Choose one</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+              <option value="expert">Expert</option>
             </select>
           </label>
         </div>
@@ -270,46 +332,82 @@
 
       <fieldset class="surrender-section">
         <legend><span>7</span> Parrot care knowledge</legend>
-        <p class="section-description">Please answer in your own words. These questions help us identify topics we may need to discuss with you.</p>
+        <p class="section-description">Please answer in your own words. These questions help us identify topics we may
+          need to discuss with you.</p>
         <div class="surrender-field-grid">
-          <label class="form-field form-field--wide"><span>What do you plan to feed your bird? *</span><textarea name="careKnowledge.plannedDiet" rows="5" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>What foods are toxic to birds? *</span><textarea name="careKnowledge.toxicFoods" rows="4" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>How is proper cage size determined? *</span><textarea name="careKnowledge.properCageSize" rows="4" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>Do you already have a cage? If so, what are its dimensions? *</span><textarea name="careKnowledge.currentCage" rows="4" maxlength="2000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>Where will the bird's cage be located? *</span><textarea name="careKnowledge.cageLocation" rows="4" maxlength="3000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>What bird-safe toys will you provide? *</span><textarea name="careKnowledge.safeToys" rows="4" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>Describe signs of illness in a bird. *</span><textarea name="careKnowledge.signsOfIllness" rows="5" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>List safe cage liners. *</span><textarea name="careKnowledge.safeCageLiners" rows="4" maxlength="3000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>What materials are safe for perches? *</span><textarea name="careKnowledge.safePerchMaterials" rows="4" maxlength="3000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>Why are different-diameter perches necessary? *</span><textarea name="careKnowledge.perchDiameterReason" rows="4" maxlength="3000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>Describe household dangers a bird could encounter. *</span><textarea name="careKnowledge.householdDangers" rows="5" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>List household cleaners that are toxic to birds. *</span><textarea name="careKnowledge.toxicCleaners" rows="4" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>List plants that are toxic to parrots. *</span><textarea name="careKnowledge.toxicPlants" rows="4" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>What do you plan to feed your bird? *</span><textarea
+              name="careKnowledge.plannedDiet" rows="5" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>What foods are toxic to birds? *</span><textarea
+              name="careKnowledge.toxicFoods" rows="4" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>How is proper cage size determined? *</span><textarea
+              name="careKnowledge.properCageSize" rows="4" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>Do you already have a cage? If so, what are its dimensions?
+              *</span><textarea name="careKnowledge.currentCage" rows="4" maxlength="2000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>Where will the bird's cage be located? *</span><textarea
+              name="careKnowledge.cageLocation" rows="4" maxlength="3000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>What bird-safe toys will you provide? *</span><textarea
+              name="careKnowledge.safeToys" rows="4" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>Describe signs of illness in a bird. *</span><textarea
+              name="careKnowledge.signsOfIllness" rows="5" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>List safe cage liners. *</span><textarea
+              name="careKnowledge.safeCageLiners" rows="4" maxlength="3000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>What materials are safe for perches? *</span><textarea
+              name="careKnowledge.safePerchMaterials" rows="4" maxlength="3000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>Why are different-diameter perches necessary?
+              *</span><textarea name="careKnowledge.perchDiameterReason" rows="4" maxlength="3000"
+              required></textarea></label>
+          <label class="form-field form-field--wide"><span>Describe household dangers a bird could encounter.
+              *</span><textarea name="careKnowledge.householdDangers" rows="5" maxlength="5000"
+              required></textarea></label>
+          <label class="form-field form-field--wide"><span>List household cleaners that are toxic to birds.
+              *</span><textarea name="careKnowledge.toxicCleaners" rows="4" maxlength="5000"
+              required></textarea></label>
+          <label class="form-field form-field--wide"><span>List plants that are toxic to parrots. *</span><textarea
+              name="careKnowledge.toxicPlants" rows="4" maxlength="5000" required></textarea></label>
         </div>
       </fieldset>
 
       <fieldset class="surrender-section">
         <legend><span>8</span> Interaction and behavior</legend>
         <div class="surrender-field-grid">
-          <label class="form-field form-field--wide"><span>How will you socialize and interact with your bird? *</span><textarea name="interaction.socializationPlan" rows="5" maxlength="5000" required></textarea></label>
-          <label class="form-field"><span>Hours per day available for interaction *</span><input name="interaction.interactionHoursPerDay" type="number" min="0" max="24" step="0.5" required></label>
-          <label class="form-field"><span>Hours per day the parrot will be alone *</span><input name="interaction.hoursLeftAlone" type="number" min="0" max="24" step="0.5" required></label>
-          <label class="form-field form-field--wide"><span>What are your expectations for the parrot's behavior and personality? *</span><textarea name="interaction.behaviorExpectations" rows="5" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>How will you handle normal destructive chewing behavior? *</span><textarea name="interaction.chewingResponse" rows="5" maxlength="5000" required></textarea></label>
-          <label class="form-field form-field--wide"><span>How would you handle a screaming parrot? *</span><textarea name="interaction.screamingResponse" rows="5" maxlength="5000" required></textarea></label>
+          <label class="form-field form-field--wide"><span>How will you socialize and interact with your bird?
+              *</span><textarea name="interaction.socializationPlan" rows="5" maxlength="5000"
+              required></textarea></label>
+          <label class="form-field"><span>Hours per day available for interaction *</span><input
+              name="interaction.interactionHoursPerDay" type="number" min="0" max="24" step="0.5" required></label>
+          <label class="form-field"><span>Hours per day the parrot will be alone *</span><input
+              name="interaction.hoursLeftAlone" type="number" min="0" max="24" step="0.5" required></label>
+          <label class="form-field form-field--wide"><span>What are your expectations for the parrot's behavior and
+              personality? *</span><textarea name="interaction.behaviorExpectations" rows="5" maxlength="5000"
+              required></textarea></label>
+          <label class="form-field form-field--wide"><span>How will you handle normal destructive chewing behavior?
+              *</span><textarea name="interaction.chewingResponse" rows="5" maxlength="5000"
+              required></textarea></label>
+          <label class="form-field form-field--wide"><span>How would you handle a screaming parrot? *</span><textarea
+              name="interaction.screamingResponse" rows="5" maxlength="5000" required></textarea></label>
           <label class="form-field"><span>How prepared are you to provide a suitable environment? *</span>
-            <select name="interaction.preparedness" required><option value="">Choose one</option><option value="somewhat">Somewhat prepared</option><option value="prepared">Prepared</option><option value="very-prepared">Very prepared</option></select>
+            <select name="interaction.preparedness" required>
+              <option value="">Choose one</option>
+              <option value="somewhat">Somewhat prepared</option>
+              <option value="prepared">Prepared</option>
+              <option value="very-prepared">Very prepared</option>
+            </select>
           </label>
-          <label class="form-field form-field--wide"><span>Anything else about you or your household that we should know?</span><textarea name="interaction.additionalInformation" rows="5" maxlength="5000"></textarea></label>
+          <label class="form-field form-field--wide"><span>Anything else about you or your household that we should
+              know?</span><textarea name="interaction.additionalInformation" rows="5"
+              maxlength="5000"></textarea></label>
         </div>
       </fieldset>
 
       <fieldset class="surrender-section">
         <legend><span>9</span> Personal reference</legend>
-        <p class="section-description">Please provide someone who can speak to your knowledge and experience with birds.</p>
+        <p class="section-description">Please provide someone who can speak to your knowledge and experience with birds.
+        </p>
         <div class="surrender-field-grid">
-          <label class="form-field"><span>Reference's full name *</span><input name="reference.name" type="text" maxlength="150" required></label>
-          <label class="form-field"><span>Reference's phone number *</span><input name="reference.phone" type="tel" maxlength="50" required></label>
+          <label class="form-field"><span>Reference's full name *</span><input name="reference.name" type="text"
+              maxlength="150" required></label>
+          <label class="form-field"><span>Reference's phone number *</span><input name="reference.phone" type="tel"
+              maxlength="50" required></label>
         </div>
       </fieldset>
 
@@ -336,8 +434,10 @@
           <span>I have read, understand and agree to the statements above. *</span>
         </label>
         <div class="surrender-field-grid">
-          <label class="form-field"><span>Type your full legal name *</span><input name="agreement.typedName" type="text" maxlength="150" autocomplete="name" required></label>
-          <label class="form-field"><span>Today's date *</span><input name="agreement.agreementDate" id="agreement-date" type="date" required></label>
+          <label class="form-field"><span>Type your full legal name *</span><input name="agreement.typedName"
+              type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input name="agreement.agreementDate" id="agreement-date"
+              type="date" required></label>
         </div>
       </fieldset>
 
