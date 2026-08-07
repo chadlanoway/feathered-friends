@@ -78,7 +78,7 @@ function displayBird(bird) {
     `./birds.html?category=${encodeURIComponent(bird.category)}`;
 
   categoryLink.textContent =
-    `View more ${formatCategory(bird.category)}`;
+    `← View more ${formatCategory(bird.category)}`;
 
   document.title =
     `${bird.name} | Feathered Friends`;

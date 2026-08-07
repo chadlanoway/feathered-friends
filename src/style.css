@@ -352,10 +352,21 @@ h1 {
 
 .mission-logo {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   object-fit: contain;
   opacity: 0.8;
+
+}
+
+.about-logo {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  opacity: 0.8;
+  margin-inline: auto;
+  object-fit: contain;
 }
 
 .content-wrapper {
@@ -2120,4 +2131,10 @@ h1 {
     padding-top: 0.15rem;
     border-top: 0;
   }
+}
+
+.adoption-application-button {
+  display: table;
+  margin: 1.5rem auto 0;
+  text-shadow: none;
 }

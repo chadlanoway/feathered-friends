@@ -7,7 +7,10 @@ export function renderHeader() {
 
   headerContainer.innerHTML = `
     <header class="site-header">
+    
+
       <nav class="navbar" aria-label="Main navigation">
+      
         <a class="site-logo" href="./index.html">
           <span class="logo-name">Feathered Friends</span>
           <span class="logo-tagline">
