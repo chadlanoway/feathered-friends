@@ -87,7 +87,35 @@ const surrenderDetailContent =
 const closeSurrenderDetailButton =
   document.querySelector("#close-surrender-detail");
 
+const adoptionMessage =
+  document.querySelector("#adoption-dashboard-message");
+
+const adoptionTableWrapper =
+  document.querySelector("#adoption-table-wrapper");
+
+const adoptionsBody =
+  document.querySelector("#dashboard-adoptions");
+
+const adoptionFilterButtons =
+  document.querySelectorAll("[data-adoption-view]");
+
+const adoptionDetailPanel =
+  document.querySelector("#adoption-detail-panel");
+
+const adoptionDetailTitle =
+  document.querySelector("#adoption-detail-title");
+
+const adoptionDetailId =
+  document.querySelector("#adoption-detail-id");
+
+const adoptionDetailContent =
+  document.querySelector("#adoption-detail-content");
+
+const closeAdoptionDetailButton =
+  document.querySelector("#close-adoption-detail");
+
 let currentSurrenderView = "unreviewed";
+let currentAdoptionView = "unreviewed";
 loginForm.addEventListener("submit", handleLogin);
 newPasswordForm.addEventListener(
   "submit",
@@ -149,6 +177,10 @@ dashboardNavigationLinks.forEach((link) => {
     if (sectionName === "surrenders") {
       loadSurrenders(currentSurrenderView);
     }
+
+    if (sectionName === "adoptions") {
+      loadAdoptions(currentAdoptionView);
+    }
   });
 });
 
@@ -161,6 +193,17 @@ surrenderFilterButtons.forEach((button) => {
 closeSurrenderDetailButton.addEventListener(
   "click",
   closeSurrenderDetail
+);
+
+adoptionFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    loadAdoptions(button.dataset.adoptionView);
+  });
+});
+
+closeAdoptionDetailButton.addEventListener(
+  "click",
+  closeAdoptionDetail
 );
 
 async function checkExistingSession() {
@@ -458,6 +501,199 @@ function renderSurrenders(submissions) {
   });
 }
 
+async function loadAdoptions(view = "unreviewed") {
+  currentAdoptionView = view;
+  closeAdoptionDetail();
+
+  adoptionFilterButtons.forEach((button) => {
+    const isActive = button.dataset.adoptionView === view;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+    button.disabled = true;
+  });
+
+  adoptionMessage.textContent = "Loading adoption applications...";
+  adoptionTableWrapper.hidden = true;
+  adoptionsBody.replaceChildren();
+
+  try {
+    const accessToken = await getDashboardAccessToken();
+    const parameters = new URLSearchParams({
+      formType: "adoption",
+      view,
+      limit: "100"
+    });
+
+    const response = await fetch(
+      `${API_URL}/admin/submissions?${parameters}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        `Submissions API returned ${response.status}`
+      );
+    }
+
+    const submissions = result.submissions ?? [];
+    renderAdoptions(submissions);
+
+    adoptionMessage.textContent = submissions.length === 0
+      ? view === "unreviewed"
+        ? "There are no unreviewed adoption applications."
+        : "There are no adoption applications."
+      : `${submissions.length} adoption application(s) found.`;
+
+    adoptionTableWrapper.hidden = submissions.length === 0;
+  } catch (error) {
+    console.error(error);
+    adoptionMessage.textContent =
+      error.message || "Unable to load adoption applications.";
+  } finally {
+    adoptionFilterButtons.forEach((button) => {
+      button.disabled = false;
+    });
+  }
+}
+
+function renderAdoptions(submissions) {
+  adoptionsBody.replaceChildren();
+
+  submissions.forEach((submission) => {
+    const row = document.createElement("tr");
+    const actionCell = document.createElement("td");
+    const actionGroup = document.createElement("div");
+    const viewButton = document.createElement("button");
+    const downloadButton = document.createElement("button");
+
+    viewButton.type = "button";
+    viewButton.className = "submission-action-button submission-action-button--view";
+    viewButton.textContent = "View";
+    viewButton.addEventListener("click", () => {
+      loadAdoptionDetail(submission.submissionId);
+    });
+
+    downloadButton.type = "button";
+    downloadButton.className = "submission-action-button submission-action-button--download";
+    downloadButton.textContent = "Download";
+    downloadButton.addEventListener("click", () => {
+      downloadAdoptionSubmission(submission.submissionId, downloadButton);
+    });
+
+    actionGroup.className = "submission-row-actions";
+    actionGroup.append(viewButton, downloadButton);
+    actionCell.append(actionGroup);
+
+    row.append(
+      createCell(formatSubmissionDate(submission.submittedAt)),
+      createCell(submission.applicantName),
+      createCell(submission.birdName || "Undecided"),
+      createCell(submission.applicantEmail),
+      createStatusCell(submission.reviewStatus),
+      createAdoptionDecisionCell(submission),
+      actionCell
+    );
+
+    adoptionsBody.append(row);
+  });
+}
+
+function createAdoptionDecisionCell(submission) {
+  const cell = document.createElement("td");
+  const select = document.createElement("select");
+
+  select.className = "submission-decision-select";
+  select.setAttribute(
+    "aria-label",
+    `Decision for ${submission.applicantName || "adoption application"}`
+  );
+
+  [
+    ["", "Choose..."],
+    ["accepted", "Accepted"],
+    ["rejected", "Rejected"]
+  ].forEach(([value, label]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    select.append(option);
+  });
+
+  select.value = ["accepted", "rejected"].includes(submission.decision)
+    ? submission.decision
+    : "";
+
+  select.dataset.previousValue = select.value;
+  select.classList.toggle("is-accepted", select.value === "accepted");
+  select.classList.toggle("is-rejected", select.value === "rejected");
+
+  select.addEventListener("change", () => {
+    if (select.value) {
+      changeAdoptionDecision(submission, select);
+    }
+  });
+
+  cell.append(select);
+  return cell;
+}
+
+async function changeAdoptionDecision(submission, select) {
+  const decision = select.value;
+  const previousValue = select.dataset.previousValue || "";
+  const confirmed = window.confirm(
+    `Mark the adoption application from ${submission.applicantName || "this applicant"} as ${decision}? ` +
+    "This will also mark the application as reviewed."
+  );
+
+  if (!confirmed) {
+    select.value = previousValue;
+    return;
+  }
+
+  select.disabled = true;
+  adoptionMessage.textContent = `Saving ${decision} decision...`;
+
+  try {
+    const accessToken = await getDashboardAccessToken();
+    const response = await fetch(
+      `${API_URL}/admin/submissions/${encodeURIComponent(submission.submissionId)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ decision })
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        `Submissions API returned ${response.status}`
+      );
+    }
+
+    await loadAdoptions(currentAdoptionView);
+    adoptionMessage.textContent = result.message;
+  } catch (error) {
+    console.error(error);
+    select.value = previousValue;
+    select.disabled = false;
+    adoptionMessage.textContent =
+      error.message || "Unable to save the decision.";
+  }
+}
+
 function createDecisionCell(submission) {
   const cell = document.createElement("td");
   const select = document.createElement("select");
@@ -708,6 +944,111 @@ function formatSubmissionDownload(submission) {
   return lines.join("\r\n");
 }
 
+async function loadAdoptionDetail(submissionId) {
+  adoptionDetailPanel.hidden = false;
+  adoptionDetailTitle.textContent = "Loading application...";
+  adoptionDetailId.textContent = submissionId;
+  adoptionDetailContent.replaceChildren();
+
+  adoptionDetailPanel.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  try {
+    const submission = await fetchSubmission(submissionId);
+    renderAdoptionDetail(submission);
+  } catch (error) {
+    console.error(error);
+    adoptionDetailTitle.textContent = "Unable to load application";
+
+    const message = document.createElement("p");
+    message.className = "submission-detail-error";
+    message.textContent =
+      error.message || "Unable to load this adoption application.";
+    adoptionDetailContent.append(message);
+  }
+}
+
+async function downloadAdoptionSubmission(submissionId, button) {
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "Preparing...";
+
+  try {
+    const submission = await fetchSubmission(submissionId);
+    const fileContent = formatAdoptionDownload(submission);
+    const blob = new Blob([fileContent], {
+      type: "text/plain;charset=utf-8"
+    });
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const safeApplicantName = (submission.applicantName || "adoption-application")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+
+    link.href = downloadUrl;
+    link.download = `${safeApplicantName || "adoption-application"}-${submission.submissionId}.txt`;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(downloadUrl);
+  } catch (error) {
+    console.error(error);
+    adoptionMessage.textContent =
+      error.message || "Unable to download the application.";
+  } finally {
+    button.disabled = false;
+    button.textContent = originalText;
+  }
+}
+
+function formatAdoptionDownload(submission) {
+  const lines = [
+    "FEATHERED FRIENDS SANCTUARY & RESCUE, INC.",
+    "ADOPTION APPLICATION",
+    "",
+    `Submission ID: ${submission.submissionId}`,
+    `Submitted: ${formatSubmissionDate(submission.submittedAt)}`,
+    `Review status: ${formatAnswer(submission.reviewStatus)}`,
+    `Decision: ${formatAnswer(submission.decision)}`,
+    ""
+  ];
+
+  const sections = [
+    ["CONTACT INFORMATION", submission.contact],
+    ["APPLICANT INFORMATION", submission.applicant],
+    ["RESIDENCE", submission.residence],
+    ["HOUSEHOLD", submission.household],
+    ["PETS AND VETERINARY CARE", submission.pets],
+    ["ADOPTION INTEREST", submission.adoptionInterest],
+    ["LONG-TERM COMMITMENT", submission.commitment],
+    ["PARROT CARE KNOWLEDGE", submission.careKnowledge],
+    ["INTERACTION AND BEHAVIOR", submission.interaction],
+    ["PERSONAL REFERENCE", submission.reference],
+    ["AGREEMENT", submission.agreement]
+  ];
+
+  sections.forEach(([title, values]) => {
+    if (!values || Object.keys(values).length === 0) {
+      return;
+    }
+
+    lines.push(title, "-".repeat(title.length));
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value !== "" && value !== null && value !== undefined) {
+        lines.push(`${friendlyFieldName(key)}: ${formatAnswer(value)}`);
+      }
+    });
+
+    lines.push("");
+  });
+
+  return lines.join("\r\n");
+}
+
 function renderSurrenderDetail(submission) {
   surrenderDetailTitle.textContent =
     `${submission.birdName || "Unnamed bird"} - ${submission.applicantName || "Unknown applicant"}`;
@@ -739,6 +1080,46 @@ function renderSurrenderDetail(submission) {
   sections.forEach(([title, values]) => {
     if (values && Object.keys(values).length > 0) {
       surrenderDetailContent.append(
+        createSubmissionDetailSection(title, values)
+      );
+    }
+  });
+}
+
+function renderAdoptionDetail(submission) {
+  adoptionDetailTitle.textContent =
+    `${submission.applicantName || "Unknown applicant"} - ` +
+    `${submission.birdName || "Undecided bird"}`;
+  adoptionDetailId.textContent = submission.submissionId;
+  adoptionDetailContent.replaceChildren();
+
+  const summary = {
+    submittedAt: formatSubmissionDate(submission.submittedAt),
+    reviewStatus: submission.reviewStatus,
+    decision: submission.decision,
+    applicantName: submission.applicantName,
+    applicantEmail: submission.applicantEmail,
+    birdName: submission.birdName
+  };
+
+  const sections = [
+    ["Application summary", summary],
+    ["Contact information", submission.contact],
+    ["Applicant information", submission.applicant],
+    ["Residence", submission.residence],
+    ["Household", submission.household],
+    ["Pets and veterinary care", submission.pets],
+    ["Adoption interest", submission.adoptionInterest],
+    ["Long-term commitment", submission.commitment],
+    ["Parrot care knowledge", submission.careKnowledge],
+    ["Interaction and behavior", submission.interaction],
+    ["Personal reference", submission.reference],
+    ["Agreement", submission.agreement]
+  ];
+
+  sections.forEach(([title, values]) => {
+    if (values && Object.keys(values).length > 0) {
+      adoptionDetailContent.append(
         createSubmissionDetailSection(title, values)
       );
     }
@@ -808,6 +1189,13 @@ function closeSurrenderDetail() {
   surrenderDetailTitle.textContent = "Submission details";
   surrenderDetailId.textContent = "";
   surrenderDetailContent.replaceChildren();
+}
+
+function closeAdoptionDetail() {
+  adoptionDetailPanel.hidden = true;
+  adoptionDetailTitle.textContent = "Application details";
+  adoptionDetailId.textContent = "";
+  adoptionDetailContent.replaceChildren();
 }
 
 async function changePublishStatus(bird, button) {

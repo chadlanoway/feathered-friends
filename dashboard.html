@@ -207,7 +207,7 @@
                     </section>
 
                     <p id="dashboard-message" role="status">
-                        Loading birds…
+                        Loading birds...
                     </p>
 
                     <div class="dashboard-table-wrapper">
@@ -251,14 +251,70 @@
 
                 <section id="dashboard-section-adoptions" class="dashboard-section" data-dashboard-panel="adoptions"
                     hidden>
-                    <div class="dashboard-placeholder">
-                        <p class="eyebrow">Application management</p>
-                        <h1>Adoptions</h1>
-                        <p>
-                            Adoption applications and their current status
-                            will appear here.
-                        </p>
+
+                    <header class="dashboard-section-header surrender-dashboard-header">
+                        <div>
+                            <p class="eyebrow">Application management</p>
+                            <h1>Adoptions</h1>
+                            <p>
+                                Review adoption applications submitted through the public website.
+                            </p>
+                        </div>
+
+                        <div class="submission-filters" aria-label="Adoption application filters">
+                            <button class="submission-filter is-active" type="button" data-adoption-view="unreviewed"
+                                aria-pressed="true">
+                                Unreviewed
+                            </button>
+
+                            <button class="submission-filter" type="button" data-adoption-view="all"
+                                aria-pressed="false">
+                                All
+                            </button>
+                        </div>
+                    </header>
+
+                    <p id="adoption-dashboard-message" class="submission-message" role="status">
+                        Select Adoptions to load applications.
+                    </p>
+
+                    <div id="adoption-table-wrapper" class="dashboard-table-wrapper" hidden>
+
+                        <table class="dashboard-table surrender-table">
+                            <thead>
+                                <tr>
+                                    <th>Submitted</th>
+                                    <th>Applicant</th>
+                                    <th>Bird requested</th>
+                                    <th>Email</th>
+                                    <th>Review</th>
+                                    <th>Decision</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="dashboard-adoptions"></tbody>
+                        </table>
                     </div>
+
+                    <section id="adoption-detail-panel" class="submission-detail-panel"
+                        aria-labelledby="adoption-detail-title" hidden>
+
+                        <header class="submission-detail-header">
+                            <div>
+                                <p class="eyebrow">Adoption application</p>
+                                <h2 id="adoption-detail-title">Application details</h2>
+                                <p id="adoption-detail-id" class="submission-detail-id">
+                                </p>
+                            </div>
+
+                            <button id="close-adoption-detail" class="form-secondary-button" type="button">
+                                Close details
+                            </button>
+                        </header>
+
+                        <div id="adoption-detail-content"></div>
+                    </section>
                 </section>
 
                 <section id="dashboard-section-surrenders" class="dashboard-section" data-dashboard-panel="surrenders"
@@ -303,8 +359,8 @@
                         </table>
                     </div>
 
-                    <section id="surrender-detail-panel" class="submission-detail-panel" aria-labelledby="surrender-detail-title"
-                        hidden>
+                    <section id="surrender-detail-panel" class="submission-detail-panel"
+                        aria-labelledby="surrender-detail-title" hidden>
                         <header class="submission-detail-header">
                             <div>
                                 <p class="eyebrow">Surrender request</p>
