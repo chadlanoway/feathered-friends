@@ -21,6 +21,7 @@ export default defineConfig({
                 contact: resolve(__dirname, "contact.html"),
                 faq: resolve(__dirname, "faq.html"),
 
+
             },
         },
     },
