@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.20.2/dist/maplibre-gl.css">
+
+    <script src="https://unpkg.com/maplibre-gl@5.20.2/dist/maplibre-gl.js"></script>
+    <link rel="stylesheet" href="/src/style.css">
+    <meta name="description" content="A safe and loving home for parrots in need." />
+
+    <title>Feathered Friends Parrot Rescue</title>
+</head>
+
+<body>
+    <div id="site-header"></div>
+    <img class="fixed-leaves fixed-leaves--top-left" src="/images/top.png" alt="" aria-hidden="true">
+
+    <img class="fixed-leaves fixed-leaves--bottom-right" src="/images/bottom.png" alt="" aria-hidden="true">
+    <main>
+        <section class="hero adoption-hero" id="adoption">
+            <div class="parallax-layer background-layer"></div>
+
+
+            <header class="adoption-header">
+                <p class="eyebrow">Get in touch</p>
+
+                <h1>We’re here to help</h1>
+
+                <p>
+                    Have a question about our birds, programs, or sanctuary that
+                    isn’t covered in our <a class="inline-link" href="./faq.html">FAQ</a>?
+                    Send us a message and a Feathered Friends volunteer will respond
+                    as soon as possible.
+                </p>
+
+            </header>
+
+            <div class="contact-card">
+                <p class="eyebrow">Contact us</p>
+
+                <h2>Feathered Friends Sanctuary &amp; Rescue, Inc.</h2>
+
+                <address class="contact-details">
+                    <p>
+                        1570 County Road A<br>
+                        Edgerton, WI 53534
+                    </p>
+
+                    <p>
+                        <strong>Voicemail only</strong><br>
+                        <a href="tel:+16083021732">608-302-1732</a>
+                    </p>
+
+                    <p>
+                        <a href="mailto:info@feathered-friends.com">
+                            info@feathered-friends.com
+                        </a>
+                    </p>
+
+                    <div class="contact-map-panel">
+                        <div class="contact-map-heading">
+                            <div>
+                                <p class="eyebrow">Find us</p>
+                                <h2>Visit Feathered Friends</h2>
+                            </div>
+
+                            <a class="contact-directions-link"
+                                href="https://www.google.com/maps/dir/?api=1&destination=1570+County+Road+A%2C+Edgerton%2C+WI+53534"
+                                target="_blank" rel="noopener noreferrer">
+                                Get directions
+                            </a>
+                        </div>
+
+                        <div id="contact-map" aria-label="Map showing Feathered Friends Sanctuary and Rescue"></div>
+                    </div>
+                </address>
+
+                <div class="contact-appointment-notice">
+                    <strong>Please note</strong>
+                    <p>We are open to the public by appointment only.</p>
+                </div>
+            </div>
+
+
+        </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/contact-map.js"></script>
+</body>
+
+</html>

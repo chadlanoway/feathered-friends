@@ -18,6 +18,8 @@ export default defineConfig({
                 dashboard: resolve(__dirname, "dashboard.html"),
                 volunteerForm: resolve(__dirname, "volunteer-form.html"),
                 boarding: resolve(__dirname, "boarding.html"),
+                contact: resolve(__dirname, "contact.html"),
+                faq: resolve(__dirname, "faq.html.html"),
 
             },
         },
