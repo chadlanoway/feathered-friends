@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review boarding requirements, rates, and submit a parrot boarding request to Feathered Friends Sanctuary & Rescue.">
+  <title>Parrot Boarding | Feathered Friends</title>
+</head>
+
+<body class="surrender-page-body">
+  <div id="site-header"></div>
+
+  <main class="surrender-page boarding-page">
+    <header class="surrender-intro">
+      <p class="eyebrow">Safe, experienced care</p>
+      <h1>Parrot boarding</h1>
+      <p>Review our health requirements and rates, then submit one boarding request for each bird.</p>
+    </header>
+
+    <section class="boarding-information" aria-labelledby="boarding-requirements-heading">
+      <div class="boarding-info-card boarding-info-card--important">
+        <p class="eyebrow">Before you apply</p>
+        <h2 id="boarding-requirements-heading">Health requirements</h2>
+        <p>We require proof of a veterinary exam performed by an avian veterinarian before a bird can board at our facility. Any diagnostics recommended by your veterinarian should be completed.</p>
+        <p>Birds must be examined or tested for these communicable diseases before boarding:</p>
+        <ul class="boarding-requirement-list">
+          <li>Psittacosis</li>
+          <li>Psittacine Beak and Feather Disease (PBFD)</li>
+          <li>Avian Polyomavirus (APV)</li>
+          <li>Psittacine Herpes Virus (PsHV-1)</li>
+          <li>Avian Bornavirus (ABV)</li>
+        </ul>
+        <p><strong>The completed boarding contract must be received at least one week before the requested stay.</strong></p>
+      </div>
+
+      <div class="boarding-info-card">
+        <p class="eyebrow">Daily rates</p>
+        <h2>Boarding fees</h2>
+        <div class="boarding-rate-list">
+          <div><strong>$15 per day</strong><span>Budgies, parakeets, cockatiels, parrotlets, conures, Senegals, and similar birds</span></div>
+          <div><strong>$20 per day</strong><span>Amazons, African Greys, Eclectus, Alexandrines, and similar birds</span></div>
+          <div><strong>$30 per day</strong><span>Macaws, cockatoos, and similar birds</span></div>
+        </div>
+        <p>A 10% discount is available if you provide your own cage. We may not have a stand available for it. We can prepare one of our cages at no additional cost.</p>
+        <p>Active, consistent volunteers may qualify for boarding discounts after volunteering for 90 days at a minimum of two shifts per month.</p>
+      </div>
+
+      <div class="boarding-info-card boarding-info-card--wide">
+        <p class="eyebrow">Food and scheduling</p>
+        <h2>Planning your bird's stay</h2>
+        <p>We provide fresh chop or mash in the morning and TOP's pellets in the evening at no additional cost. If your bird eats another diet, please provide its usual food to avoid an abrupt transition. We will not serve food that is unsafe for parrots and may use our food at our discretion if unsuitable food is supplied.</p>
+        <p>Requested drop-off and pickup times depend on volunteer availability and are not confirmed until a Feathered Friends representative contacts you.</p>
+      </div>
+    </section>
+
+    <form id="boarding-form" class="surrender-form boarding-form" novalidate>
+      <div class="surrender-form-error" id="boarding-form-error" role="alert" tabindex="-1" hidden></div>
+
+      <label class="surrender-honeypot" aria-hidden="true">Website
+        <input name="website" type="text" tabindex="-1" autocomplete="off">
+      </label>
+
+      <fieldset class="surrender-section">
+        <legend><span>1</span> Bird information</legend>
+        <p class="section-description">Please submit a separate form for each bird.</p>
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Bird's name *</span><input name="bird.name" type="text" maxlength="150" required></label>
+          <label class="form-field"><span>Species *</span><input name="bird.species" type="text" maxlength="150" required></label>
+          <label class="form-field"><span>Age</span><input name="bird.age" type="text" maxlength="100"></label>
+          <label class="form-field"><span>Sex</span><select name="bird.sex"><option value="unknown">Unknown</option><option value="female">Female</option><option value="male">Male</option></select></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>2</span> Owner and emergency contact</legend>
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Owner's full name *</span><input name="owner.fullName" type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Email address *</span><input name="owner.email" type="email" maxlength="254" autocomplete="email" required></label>
+          <label class="form-field"><span>Home phone</span><input name="owner.homePhone" type="tel" maxlength="50" autocomplete="tel"></label>
+          <label class="form-field"><span>Cell phone *</span><input name="owner.cellPhone" type="tel" maxlength="50" autocomplete="tel" required></label>
+          <label class="form-field form-field--wide"><span>Full address *</span><textarea name="owner.fullAddress" rows="3" maxlength="500" autocomplete="street-address" placeholder="House number, street, city, state and ZIP code" required></textarea></label>
+          <label class="form-field"><span>Emergency contact person *</span><input name="emergencyContact.fullName" type="text" maxlength="150" required></label>
+          <label class="form-field"><span>Emergency contact phone *</span><input name="emergencyContact.phone" type="tel" maxlength="50" required></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>3</span> Veterinary care and disease testing</legend>
+        <div class="surrender-notice boarding-inline-notice"><strong>Verification is required.</strong> Bring or send the veterinary exam and test records as directed by Feathered Friends staff. This form does not upload medical records.</div>
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Has the bird seen an avian veterinarian within the last year? *</span><select name="health.avianVetWithinYear" required><option value="">Choose an answer</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Veterinarian's name *</span><input name="veterinarian.name" type="text" maxlength="200" required></label>
+          <label class="form-field"><span>Veterinarian's phone *</span><input name="veterinarian.phone" type="tel" maxlength="50" required></label>
+          <label class="form-field form-field--wide"><span>Veterinarian's address *</span><textarea name="veterinarian.address" rows="3" maxlength="500" required></textarea></label>
+        </div>
+
+        <h3 class="boarding-subheading">Testing completed within the last year</h3>
+        <div class="boarding-test-grid">
+          <label><span>Psittacosis *</span><select name="diseaseTesting.psittacosis" required><option value="">Choose status</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="not-tested">Not tested</option><option value="unknown">Unknown</option></select></label>
+          <label><span>PBFD *</span><select name="diseaseTesting.pbfd" required><option value="">Choose status</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="not-tested">Not tested</option><option value="unknown">Unknown</option></select></label>
+          <label><span>Avian Polyomavirus (APV) *</span><select name="diseaseTesting.apv" required><option value="">Choose status</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="not-tested">Not tested</option><option value="unknown">Unknown</option></select></label>
+          <label><span>Psittacine Herpes Virus (PsHV-1) *</span><select name="diseaseTesting.pshv1" required><option value="">Choose status</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="not-tested">Not tested</option><option value="unknown">Unknown</option></select></label>
+          <label><span>Avian Bornavirus (ABV) *</span><select name="diseaseTesting.abv" required><option value="">Choose status</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="not-tested">Not tested</option><option value="unknown">Unknown</option></select></label>
+        </div>
+        <label class="form-field boarding-top-spacing"><span>Known health conditions</span><textarea name="health.knownConditions" rows="5" maxlength="5000" placeholder="Describe any conditions, medications, special needs, or recent concerns."></textarea></label>
+        <div class="surrender-notice boarding-inline-notice"><strong>Important:</strong> A bird that has not seen an avian veterinarian within the last year or appears unhealthy at drop-off cannot be accepted. This protects boarding birds and birds in our adoption program.</div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>4</span> Animal exposure</legend>
+        <div class="surrender-field-grid">
+          <label class="form-field form-field--wide"><span>Other animals in your home or on your property</span><textarea name="exposure.otherAnimals" rows="5" maxlength="5000" placeholder="List each animal and describe your bird's level of contact with it."></textarea></label>
+          <label class="form-field"><span>Is the bird exposed directly or indirectly to animals outside your home? *</span><select name="exposure.publicExposure" required><option value="">Choose an answer</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field form-field--wide conditional-field" data-condition-field="exposure.publicExposure" data-condition-value="yes" hidden><span>Describe the outside exposure *</span><textarea name="exposure.publicExposureDetails" rows="4" maxlength="5000" data-required-when-visible placeholder="Examples: wild birds, poultry, dairy cows, dogs, cats, stores, shows, or public events."></textarea></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>5</span> Food while boarding</legend>
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Which food should be used? *</span><select name="diet.foodSource" required><option value="">Choose an option</option><option value="own">Bird's own food</option><option value="ffsr">FFSR food</option><option value="both">Both</option></select></label>
+          <div class="form-field form-field--wide conditional-field" data-condition-field="diet.foodSource" data-condition-values="own,both" hidden>
+            <span>Bird's own food</span>
+            <div class="surrender-field-grid boarding-nested-grid">
+              <label class="form-field"><span>Brand or food name *</span><input name="diet.ownFoodBrand" type="text" maxlength="250" data-required-when-visible></label>
+              <label class="form-field"><span>Amount per day *</span><input name="diet.ownFoodAmount" type="text" maxlength="250" data-required-when-visible></label>
+              <label class="form-field"><span>Fresh food or treats</span><input name="diet.freshFood" type="text" maxlength="500"></label>
+              <label class="form-field"><span>Fresh food amount per day</span><input name="diet.freshFoodAmount" type="text" maxlength="250"></label>
+            </div>
+            <small class="form-help">Wash and portion fresh food into individual dated containers labeled with your bird's name. A single mash or chop container only needs the bird's name.</small>
+          </div>
+          <label class="form-field form-field--wide"><span>Foods the bird must not receive</span><textarea name="diet.foodsToAvoid" rows="4" maxlength="3000"></textarea></label>
+        </div>
+        <div class="surrender-request-terms boarding-policy"><p><strong>Our food policy:</strong> When a bird is in our care, we must provide a healthy and balanced diet. If supplied feeding instructions do not meet those requirements, staff may instead provide the food used at FFSR.</p></div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>6</span> Requested care</legend>
+        <p class="section-description">Select all that apply. Trimming and extra requests depend on staff and volunteer availability.</p>
+        <h3 class="boarding-subheading">Trimming requests</h3>
+        <div class="boarding-choice-grid">
+          <label><input name="care.trims" type="checkbox" value="nail-trim"><span>Nail trim</span></label>
+          <label><input name="care.trims" type="checkbox" value="beak-trim"><span>Beak trim</span></label>
+          <label><input name="care.trims" type="checkbox" value="wing-trim"><span>Wing trim</span></label>
+        </div>
+        <h3 class="boarding-subheading">Care requests</h3>
+        <div class="boarding-choice-grid">
+          <label><input name="care.services" type="checkbox" value="out-of-cage-socialization"><span>Out-of-cage socialization</span></label>
+          <label><input name="care.services" type="checkbox" value="in-cage-socialization"><span>In-cage socialization</span></label>
+          <label><input name="care.services" type="checkbox" value="extra-feeding"><span>Extra feeding</span></label>
+          <label><input name="care.services" type="checkbox" value="covered-at-night"><span>Covered cage at night</span></label>
+          <label><input name="care.services" type="checkbox" value="medication"><span>Medication administration - must be discussed with staff</span></label>
+        </div>
+        <div class="surrender-field-grid boarding-top-spacing">
+          <label class="form-field form-field--wide"><span>Other requested care</span><textarea name="care.otherRequests" rows="3" maxlength="2000"></textarea></label>
+          <label class="form-field form-field--wide"><span>Additional care instructions</span><textarea name="care.instructions" rows="6" maxlength="5000"></textarea></label>
+        </div>
+        <p class="boarding-footnote">Birds that are aggressive toward volunteers may receive limited out-of-cage time. Extra requests cannot be guaranteed.</p>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>7</span> Items and additional information</legend>
+        <div class="surrender-field-grid">
+          <label class="form-field form-field--wide"><span>Items left at FFSR with the bird</span><textarea name="belongings.itemsLeft" rows="5" maxlength="5000" placeholder="Examples: cage, toys, perches, food, carrier, or medication."></textarea></label>
+          <label class="form-field form-field--wide"><span>Anything else we should know about your bird?</span><textarea name="additionalInformation.notes" rows="6" maxlength="5000"></textarea></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="surrender-section">
+        <legend><span>8</span> Requested boarding dates</legend>
+        <div class="surrender-notice boarding-inline-notice"><strong>Submit this form at least one week before the requested start date.</strong> Times are requests and will be confirmed based on volunteer availability.</div>
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Boarding start date *</span><input name="schedule.startDate" type="date" required></label>
+          <label class="form-field"><span>Requested drop-off time *</span><input name="schedule.dropOffTime" type="time" required></label>
+          <label class="form-field"><span>Pickup date *</span><input name="schedule.endDate" type="date" required></label>
+          <label class="form-field"><span>Requested pickup time *</span><input name="schedule.pickUpTime" type="time" required></label>
+        </div>
+        <p class="boarding-footnote">Call as soon as possible if your schedule changes. If you are more than one hour late without speaking to staff, drop-off or pickup may need to be rescheduled. Payment is due at pickup. A 50% deposit may be required for stays longer than 30 days.</p>
+      </fieldset>
+
+      <fieldset class="surrender-section surrender-agreement">
+        <legend><span>9</span> Boarding contract and release</legend>
+        <div class="surrender-request-terms boarding-legal-terms">
+          <p>Feathered Friends Sanctuary &amp; Rescue, Inc. (FFSR) will provide basic care by feeding, watering, cleaning, socializing, and obtaining medical assistance in the event of an emergency during the bird's stay. I certify that I am the owner of the bird described in this form.</p>
+          <p>I release FFSR and its officers, agents, and representatives from liability for this bird. I authorize FFSR to seek veterinary care for my bird as FFSR deems necessary, and I understand that I am financially responsible for veterinary care my bird receives while in FFSR's care.</p>
+          <p>In the rare event that my bird dies while in FFSR's care, I authorize FFSR to seek a veterinary necropsy and understand that I may be financially responsible for it. I understand that these steps may be necessary to protect all birds at FFSR from contagious disease.</p>
+          <p>Boarding charges are based on a per-day fee. I am responsible for additional days I request and medical costs incurred during the stay. If I do not contact FFSR within 30 days after the agreed pickup date to arrange a new pickup date or report an extended stay, I understand that the bird will become the property of FFSR and may be placed for adoption unless sufficient reason is given for the missed pickup.</p>
+        </div>
+        <label class="agreement-checkbox"><input name="agreement.accepted" type="checkbox" value="true" required><span>I have read the boarding contract and release and agree to all parts of this agreement. *</span></label>
+        <div class="surrender-field-grid">
+          <label class="form-field"><span>Type your full legal name as your signature *</span><input name="agreement.signature" type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Date signed *</span><input name="agreement.signedDate" type="date" required></label>
+          <label class="form-field form-field--wide"><span>Printed owner name *</span><input name="agreement.printedName" type="text" maxlength="150" autocomplete="name" required></label>
+        </div>
+      </fieldset>
+
+      <div class="surrender-submit-panel">
+        <p>Fields marked with an asterisk (*) are required. Review your answers before submitting one request per bird.</p>
+        <button id="boarding-submit-button" class="hero-button" type="submit">Submit boarding request</button>
+      </div>
+    </form>
+
+    <section id="boarding-success" class="surrender-success" tabindex="-1" hidden>
+      <p class="eyebrow">Request received</p>
+      <h2>Thank you. Your boarding request was submitted.</h2>
+      <p>Please save this confirmation number:</p>
+      <p class="confirmation-number" id="boarding-confirmation"></p>
+      <p>This submission is a request, not a confirmed reservation. A Feathered Friends representative will contact you about records, availability, and scheduling.</p>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/boarding.js"></script>
+</body>
+
+</html>

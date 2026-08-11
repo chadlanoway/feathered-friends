@@ -2284,3 +2284,160 @@ h1 {
     border-radius: 8px;
   }
 }
+
+.boarding-information {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: min(100%, 1100px);
+  margin: 0 auto clamp(2.5rem, 6vw, 5rem);
+}
+
+.boarding-info-card {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  color: #17321f;
+  background: #fffdf5;
+  border: 1px solid rgba(23, 50, 31, 0.16);
+  border-radius: 1.4rem;
+  box-shadow: 0 12px 32px rgba(23, 50, 31, 0.1);
+}
+
+.boarding-info-card--important {
+  border-top: 6px solid #ffcc67;
+}
+
+.boarding-info-card--wide {
+  grid-column: 1 / -1;
+}
+
+.boarding-info-card .eyebrow {
+  color: #a66712;
+}
+
+.boarding-info-card h2 {
+  margin: 0.3rem 0 1rem;
+  color: #073c2d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+.boarding-info-card p,
+.boarding-requirement-list {
+  line-height: 1.7;
+}
+
+.boarding-requirement-list {
+  padding-left: 1.35rem;
+}
+
+.boarding-rate-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.25rem 0;
+}
+
+.boarding-rate-list div {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem;
+  background: #f6f0df;
+  border-radius: 0.8rem;
+}
+
+.boarding-rate-list strong {
+  color: #075039;
+  font-size: 1.1rem;
+}
+
+.boarding-inline-notice {
+  max-width: none;
+  margin: 0 0 1.5rem;
+}
+
+.boarding-subheading {
+  margin: 1.75rem 0 1rem;
+  color: #073c2d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.boarding-top-spacing {
+  margin-top: 1.5rem;
+}
+
+.boarding-test-grid,
+.boarding-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.boarding-test-grid label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.boarding-test-grid select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 0.9rem;
+  color: #17321f;
+  background: #fff;
+  border: 1px solid rgba(23, 50, 31, 0.3);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.boarding-choice-grid label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  background: #f6f0df;
+  border: 1px solid rgba(23, 50, 31, 0.16);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  line-height: 1.45;
+}
+
+.boarding-choice-grid input {
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.1rem;
+  accent-color: #147554;
+}
+
+.boarding-nested-grid {
+  margin-top: 0.85rem;
+}
+
+.boarding-policy {
+  margin: 1.5rem 0 0;
+}
+
+.boarding-footnote {
+  margin: 1.25rem 0 0;
+  color: rgba(23, 50, 31, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.boarding-legal-terms {
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+@media (max-width: 700px) {
+
+  .boarding-information,
+  .boarding-test-grid,
+  .boarding-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .boarding-info-card--wide {
+    grid-column: auto;
+  }
+}

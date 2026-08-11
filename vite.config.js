@@ -17,6 +17,7 @@ export default defineConfig({
                 adoptionForm: resolve(__dirname, "adoption-form.html"),
                 dashboard: resolve(__dirname, "dashboard.html"),
                 volunteerForm: resolve(__dirname, "volunteer-form.html"),
+                boarding: resolve(__dirname, "boarding.html"),
 
             },
         },
