@@ -19,7 +19,7 @@ export default defineConfig({
                 volunteerForm: resolve(__dirname, "volunteer-form.html"),
                 boarding: resolve(__dirname, "boarding.html"),
                 contact: resolve(__dirname, "contact.html"),
-                faq: resolve(__dirname, "faq.html.html"),
+                faq: resolve(__dirname, "faq.html"),
 
             },
         },
