@@ -20,6 +20,7 @@ export default defineConfig({
                 boarding: resolve(__dirname, "boarding.html"),
                 contact: resolve(__dirname, "contact.html"),
                 faq: resolve(__dirname, "faq.html"),
+                donate: resolve(__dirname, "donate.html"),
 
             },
         },

@@ -4,14 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Submit a parrot surrender request to Feathered Friends Sanctuary & Rescue.">
+  <meta name="description" content="Submit a parrot surrender request to Feathered Friends Sanctuary & Rescue.">
+  <link rel="stylesheet" href="/src/style.css">
   <title>Surrender a Parrot | Feathered Friends</title>
 </head>
 
 <body class="surrender-page-body">
   <div id="site-header"></div>
-
+  <img class="fixed-leaves fixed-leaves--top-left" src="/images/top.png" alt="" aria-hidden="true">
+  <img class="fixed-leaves fixed-leaves--bottom-right" src="/images/bottom.png" alt="" aria-hidden="true">
   <main class="surrender-page">
     <header class="surrender-intro">
       <p class="eyebrow">Surrender request</p>
@@ -87,11 +88,10 @@
             </select>
           </label>
 
-          <label class="form-field form-field--wide conditional-field"
-            data-condition-field="identification.species" data-condition-value="Other" hidden>
+          <label class="form-field form-field--wide conditional-field" data-condition-field="identification.species"
+            data-condition-value="Other" hidden>
             <span>Please specify the species *</span>
-            <input name="identification.otherSpecies" type="text" maxlength="150"
-              data-required-when-visible>
+            <input name="identification.otherSpecies" type="text" maxlength="150" data-required-when-visible>
           </label>
 
           <label class="form-field">
@@ -278,38 +278,62 @@
             </select>
           </label>
 
-          <label class="form-field form-field--wide conditional-field"
-            data-condition-field="behavior.behavioralIssues" data-condition-value="yes" hidden>
+          <label class="form-field form-field--wide conditional-field" data-condition-field="behavior.behavioralIssues"
+            data-condition-value="yes" hidden>
             <span>Please describe the behavioral issues *</span>
             <textarea name="behavior.behavioralIssuesDescription" rows="4" maxlength="5000"
               data-required-when-visible></textarea>
           </label>
 
           <label class="form-field"><span>Comfortable being handled by family?</span><select
-              name="behavior.handledByFamily"><option value="unknown">Unknown</option><option value="yes">Yes</option><option
-                value="no">No</option></select></label>
+              name="behavior.handledByFamily">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
           <label class="form-field"><span>Comfortable being handled by strangers?</span><select
-              name="behavior.handledByStrangers"><option value="unknown">Unknown</option><option value="yes">Yes</option><option
-                value="no">No</option></select></label>
+              name="behavior.handledByStrangers">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
-          <label class="form-field"><span>Steps up for family?</span><select name="behavior.stepsUpForFamily"><option
-                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Steps up for family?</span><select name="behavior.stepsUpForFamily">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
-          <label class="form-field"><span>Steps up for strangers?</span><select name="behavior.stepsUpForStrangers"><option
-                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Steps up for strangers?</span><select name="behavior.stepsUpForStrangers">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
-          <label class="form-field"><span>Likes being pet or scritched?</span><select name="behavior.likesPetting"><option
-                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Likes being pet or scritched?</span><select name="behavior.likesPetting">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
-          <label class="form-field"><span>Is the parrot cage aggressive?</span><select name="behavior.cageAggressive"><option
-                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Is the parrot cage aggressive?</span><select name="behavior.cageAggressive">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
-          <label class="form-field"><span>Does the parrot like children?</span><select name="behavior.likesChildren"><option
-                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Does the parrot like children?</span><select name="behavior.likesChildren">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
-          <label class="form-field"><span>Does the parrot like visitors?</span><select name="behavior.likesVisitors"><option
-                value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="form-field"><span>Does the parrot like visitors?</span><select name="behavior.likesVisitors">
+              <option value="unknown">Unknown</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label>
 
           <label class="form-field form-field--wide">
             <span>Other animals in the home and how the parrot interacts with them</span>
@@ -337,8 +361,8 @@
             </select>
           </label>
 
-          <label class="form-field form-field--wide conditional-field"
-            data-condition-field="belongings.itemsAvailable" data-condition-value="yes" hidden>
+          <label class="form-field form-field--wide conditional-field" data-condition-field="belongings.itemsAvailable"
+            data-condition-value="yes" hidden>
             <span>What will be surrendered with the parrot?</span>
             <textarea name="belongings.itemsDescription" rows="4" maxlength="5000"></textarea>
           </label>

@@ -10,7 +10,9 @@
 
 <body class="surrender-page-body">
   <div id="site-header"></div>
+  <img class="fixed-leaves fixed-leaves--top-left" src="/images/top.png" alt="" aria-hidden="true">
 
+  <img class="fixed-leaves fixed-leaves--bottom-right" src="/images/bottom.png" alt="" aria-hidden="true">
   <main class="surrender-page">
     <header class="surrender-intro">
       <p class="eyebrow">Volunteer application</p>
@@ -74,11 +76,10 @@
             </select>
           </label>
 
-          <label class="form-field form-field--wide conditional-field"
-            data-condition-field="children.volunteering" data-condition-values="yes,maybe" hidden>
+          <label class="form-field form-field--wide conditional-field" data-condition-field="children.volunteering"
+            data-condition-values="yes,maybe" hidden>
             <span>Names and ages of the minor children *</span>
-            <textarea name="children.namesAndAges" rows="4" maxlength="2000"
-              data-required-when-visible></textarea>
+            <textarea name="children.namesAndAges" rows="4" maxlength="2000" data-required-when-visible></textarea>
           </label>
         </div>
       </fieldset>
@@ -97,38 +98,52 @@
 
             <div class="availability-row">
               <span>Monday</span>
-              <label><input type="radio" name="availability.monday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.monday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.monday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.monday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
             <div class="availability-row">
               <span>Tuesday</span>
-              <label><input type="radio" name="availability.tuesday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.tuesday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.tuesday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.tuesday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
             <div class="availability-row">
               <span>Wednesday</span>
-              <label><input type="radio" name="availability.wednesday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.wednesday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.wednesday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.wednesday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
             <div class="availability-row">
               <span>Thursday</span>
-              <label><input type="radio" name="availability.thursday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.thursday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.thursday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.thursday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
             <div class="availability-row">
               <span>Friday</span>
-              <label><input type="radio" name="availability.friday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.friday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.friday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.friday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
             <div class="availability-row">
               <span>Saturday</span>
-              <label><input type="radio" name="availability.saturday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.saturday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.saturday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.saturday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
             <div class="availability-row">
               <span>Sunday</span>
-              <label><input type="radio" name="availability.sunday" value="morning" required><span>Morning</span></label>
-              <label><input type="radio" name="availability.sunday" value="unavailable" required><span>Not available</span></label>
+              <label><input type="radio" name="availability.sunday" value="morning"
+                  required><span>Morning</span></label>
+              <label><input type="radio" name="availability.sunday" value="unavailable" required><span>Not
+                  available</span></label>
             </div>
           </div>
         </div>
@@ -185,22 +200,33 @@
         <div class="form-field form-field--wide">
           <span>Which tasks would you feel comfortable doing? Select all that apply. *</span>
           <div class="volunteer-choice-list" id="volunteer-task-options">
-            <label><input name="tasks.selected" type="checkbox" value="food-and-water"><span><strong>Food and water:</strong> Provide birds with fresh food and water.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="cage-cleaning"><span><strong>Cage cleaning:</strong> Wipe cages, scrape grates and perches, and change papers.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="general-maintenance"><span><strong>General maintenance:</strong> Sweep, mop, wipe walls and dust.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="special-maintenance"><span><strong>Special maintenance:</strong> Lawn care, building repair, plumbing or electrical work.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="toy-making"><span><strong>Toy making:</strong> Make toys, organize toy parts and maintain inventory.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="public-education"><span><strong>Public education:</strong> Help at education events and teach the public about FFSR.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="special-events"><span><strong>Special events:</strong> Help with fundraising and community events.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="veterinary-care"><span><strong>Veterinary care:</strong> I am a licensed area veterinarian interested in donating services.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="administrative"><span><strong>Administrative:</strong> Charting, data collection and office duties.</span></label>
-            <label><input name="tasks.selected" type="checkbox" value="other"><span><strong>Other</strong></span></label>
+            <label><input name="tasks.selected" type="checkbox" value="food-and-water"><span><strong>Food and
+                  water:</strong> Provide birds with fresh food and water.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="cage-cleaning"><span><strong>Cage
+                  cleaning:</strong> Wipe cages, scrape grates and perches, and change papers.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="general-maintenance"><span><strong>General
+                  maintenance:</strong> Sweep, mop, wipe walls and dust.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="special-maintenance"><span><strong>Special
+                  maintenance:</strong> Lawn care, building repair, plumbing or electrical work.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="toy-making"><span><strong>Toy making:</strong>
+                Make toys, organize toy parts and maintain inventory.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="public-education"><span><strong>Public
+                  education:</strong> Help at education events and teach the public about FFSR.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="special-events"><span><strong>Special
+                  events:</strong> Help with fundraising and community events.</span></label>
+            <label><input name="tasks.selected" type="checkbox" value="veterinary-care"><span><strong>Veterinary
+                  care:</strong> I am a licensed area veterinarian interested in donating services.</span></label>
+            <label><input name="tasks.selected" type="checkbox"
+                value="administrative"><span><strong>Administrative:</strong> Charting, data collection and office
+                duties.</span></label>
+            <label><input name="tasks.selected" type="checkbox"
+                value="other"><span><strong>Other</strong></span></label>
           </div>
         </div>
 
         <div class="surrender-field-grid volunteer-section-spacing">
-          <label class="form-field form-field--wide conditional-field"
-            data-checkbox-condition="tasks.selected" data-condition-value="other" hidden>
+          <label class="form-field form-field--wide conditional-field" data-checkbox-condition="tasks.selected"
+            data-condition-value="other" hidden>
             <span>Describe the other tasks you are interested in *</span>
             <textarea name="tasks.other" rows="4" maxlength="3000" data-required-when-visible></textarea>
           </label>
@@ -259,8 +285,10 @@
         </label>
 
         <div class="surrender-field-grid">
-          <label class="form-field"><span>Type your full legal name *</span><input name="liability.typedName" type="text" maxlength="150" autocomplete="name" required></label>
-          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date" name="liability.date" type="date" required></label>
+          <label class="form-field"><span>Type your full legal name *</span><input name="liability.typedName"
+              type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date"
+              name="liability.date" type="date" required></label>
         </div>
       </fieldset>
 
@@ -300,7 +328,8 @@
             <li>Any fundraising ideas, proposals, or upcoming project unless specifically instructed to do so by a
               Feathered Friends Sanctuary &amp; Rescue, Inc. Board of Directors officer.</li>
             <li>No talking to press, under any circumstances without prior approval.</li>
-            <li>Any personal information I obtain regarding any of the other volunteers, including the Board of Directors.</li>
+            <li>Any personal information I obtain regarding any of the other volunteers, including the Board of
+              Directors.</li>
           </ol>
           <p>
             I recognize that unauthorized release of confidential information may result in legal penalties including
@@ -318,8 +347,10 @@
         </label>
 
         <div class="surrender-field-grid">
-          <label class="form-field"><span>Type your full legal name *</span><input name="confidentiality.typedName" type="text" maxlength="150" autocomplete="name" required></label>
-          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date" name="confidentiality.date" type="date" required></label>
+          <label class="form-field"><span>Type your full legal name *</span><input name="confidentiality.typedName"
+              type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date"
+              name="confidentiality.date" type="date" required></label>
         </div>
       </fieldset>
 
@@ -343,8 +374,10 @@
         </label>
 
         <div class="surrender-field-grid">
-          <label class="form-field"><span>Type your full legal name *</span><input name="mediaRelease.typedName" type="text" maxlength="150" autocomplete="name" required></label>
-          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date" name="mediaRelease.date" type="date" required></label>
+          <label class="form-field"><span>Type your full legal name *</span><input name="mediaRelease.typedName"
+              type="text" maxlength="150" autocomplete="name" required></label>
+          <label class="form-field"><span>Today's date *</span><input class="volunteer-agreement-date"
+              name="mediaRelease.date" type="date" required></label>
         </div>
       </fieldset>
 

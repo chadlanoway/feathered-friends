@@ -39,10 +39,35 @@ export function renderHeader() {
   <a href="./surrender.html">Surrender</a>
   <a href="contact.html">Contact</a>
   <a href="faq.html">FAQ</a>
-  <a class="nav-donate" href="./index.html#donate">DONATE</a>
+  <a href="donate.html">Donate</a>
 </div>
       </nav>
     </header>
   `;
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
 
-}
+  const pageGroups = {
+    "birds.html": "adoption.html",
+    "bird.html": "adoption.html",
+    "adoption-form.html": "adoption.html",
+    "volunteer-form.html": "volunteer.html",
+    "boarding-form.html": "boarding.html"
+  };
+
+  const activePage = pageGroups[currentPage] || currentPage;
+
+  headerContainer.querySelectorAll(".nav-links a").forEach((link) => {
+    const linkUrl = new URL(link.href, window.location.href);
+    const linkPage =
+      linkUrl.pathname.split("/").pop() || "index.html";
+
+    if (
+      linkPage === activePage &&
+      !linkUrl.hash
+    ) {
+      link.classList.add("nav-donate");
+      link.setAttribute("aria-current", "page");
+    }
+  });
+} 

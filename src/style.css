@@ -2550,3 +2550,458 @@ h1 {
     height: 340px;
   }
 }
+
+.faq-content {
+  width: min(100%, 1050px);
+}
+
+.faq-header {
+  max-width: 850px;
+  margin-inline: auto;
+}
+
+.faq-header>p:last-child {
+  max-width: 720px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+.faq-section-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2rem auto clamp(2.5rem, 6vw, 5rem);
+}
+
+.faq-section-links a,
+.faq-action-link {
+  color: #17321f;
+  background: #ffcc67;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.faq-section-links a {
+  padding: 0.7rem 1rem;
+}
+
+.faq-section-links a:hover,
+.faq-section-links a:focus-visible,
+.faq-action-link:hover,
+.faq-action-link:focus-visible {
+  color: #17321f;
+  background: #ffe09b;
+  transform: translateY(-2px);
+}
+
+.faq-groups {
+  display: grid;
+  gap: 2rem;
+}
+
+.faq-group {
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  scroll-margin-top: 7rem;
+  color: #17321f;
+  background: #fffdf5;
+  border: 1px solid rgb(23 50 31 / 16%);
+  border-radius: 1.4rem;
+  box-shadow: 0 12px 32px rgb(23 50 31 / 10%);
+}
+
+.faq-group-heading {
+  margin-bottom: 1.5rem;
+}
+
+.faq-group-heading .eyebrow,
+.faq-contact-card .eyebrow {
+  color: #a66712;
+}
+
+.faq-group-heading h2,
+.faq-contact-card h2 {
+  margin: 0.25rem 0 0;
+  color: #073c2d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+}
+
+.faq-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.faq-list details {
+  overflow: hidden;
+  background: #f6f0df;
+  border: 1px solid rgb(23 50 31 / 14%);
+  border-radius: 0.9rem;
+}
+
+.faq-list summary {
+  position: relative;
+  padding: 1.1rem 3.5rem 1.1rem 1.25rem;
+  color: #073c2d;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 800;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 1.25rem;
+  transform: translateY(-50%);
+  color: #147554;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.faq-list details[open] summary::after {
+  content: "-";
+}
+
+.faq-list summary:hover,
+.faq-list summary:focus-visible {
+  background: #ffedbd;
+}
+
+.faq-answer {
+  padding: 0 1.25rem 1.3rem;
+  border-top: 1px solid rgb(23 50 31 / 12%);
+  line-height: 1.7;
+}
+
+.faq-answer p {
+  margin: 1rem 0;
+}
+
+.faq-action-link {
+  display: inline-block;
+  margin-top: 0.15rem;
+  padding: 0.7rem 1rem;
+}
+
+.faq-contact-card {
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+  color: #17321f;
+  background: #fffdf5;
+  border: 1px solid rgb(23 50 31 / 16%);
+  border-radius: 1.4rem;
+  box-shadow: 0 12px 32px rgb(23 50 31 / 10%);
+}
+
+.faq-contact-card p:not(.eyebrow) {
+  max-width: 700px;
+  margin: 1rem auto 1.5rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .faq-section-links {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .faq-section-links a {
+    text-align: center;
+  }
+
+  .faq-group {
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .faq-list summary {
+    padding-left: 1rem;
+  }
+
+  .faq-answer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.donate-content {
+  width: min(100%, 1100px);
+}
+
+.donate-header {
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.donate-header>p:not(.eyebrow, .donate-tax-note) {
+  max-width: 730px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+.donate-primary-button {
+  display: table;
+  margin: 1.75rem auto 1rem;
+}
+
+.donate-tax-note {
+  margin: 1rem auto 0;
+  color: #315846;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.donate-impact,
+.donate-methods,
+.donate-tax-card {
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.25rem, 4vw, 2.75rem);
+  color: #17321f;
+  background: #fffdf5;
+  border: 1px solid rgb(23 50 31 / 16%);
+  border-radius: 1.4rem;
+  box-shadow: 0 12px 32px rgb(23 50 31 / 10%);
+}
+
+.donate-section-heading {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.donate-section-heading .eyebrow,
+.donate-tax-card .eyebrow {
+  color: #a66712;
+}
+
+.donate-section-heading h2,
+.donate-tax-card h2 {
+  margin: 0.25rem 0 0.75rem;
+  color: #073c2d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+}
+
+.donate-section-heading>p:last-child {
+  margin-bottom: 0;
+}
+
+.donate-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.donate-impact-card {
+  padding: 1.35rem;
+  background: #f6f0df;
+  border: 1px solid rgb(23 50 31 / 12%);
+  border-radius: 1rem;
+}
+
+.donate-impact-card h3 {
+  margin: 0 0 0.45rem;
+  color: #147554;
+  font-size: 1.2rem;
+}
+
+.donate-impact-card p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.donate-section-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2rem auto 0;
+}
+
+.donate-section-links a,
+.donate-action-link {
+  padding: 0.7rem 1rem;
+  color: #17321f;
+  background: #ffcc67;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.donate-section-links a:hover,
+.donate-section-links a:focus-visible,
+.donate-action-link:hover,
+.donate-action-link:focus-visible {
+  color: #17321f;
+  background: #ffe09b;
+  transform: translateY(-2px);
+}
+
+.donate-method-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.donate-method-list details {
+  overflow: hidden;
+  scroll-margin-top: 7rem;
+  background: #f6f0df;
+  border: 1px solid rgb(23 50 31 / 14%);
+  border-radius: 0.9rem;
+}
+
+.donate-method-list summary {
+  position: relative;
+  padding: 1.1rem 3.5rem 1.1rem 1.25rem;
+  color: #073c2d;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 800;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+}
+
+.donate-method-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.donate-method-list summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 1.25rem;
+  transform: translateY(-50%);
+  color: #147554;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.donate-method-list details[open] summary::after {
+  content: "-";
+}
+
+.donate-method-list summary:hover,
+.donate-method-list summary:focus-visible {
+  background: #ffedbd;
+}
+
+.donate-method-answer {
+  padding: 0 1.25rem 1.4rem;
+  border-top: 1px solid rgb(23 50 31 / 12%);
+  line-height: 1.7;
+}
+
+.donate-method-answer h3 {
+  margin: 1.35rem 0 0.4rem;
+  color: #073c2d;
+}
+
+.donate-method-answer a:not(.donate-action-link),
+.donate-tax-card a {
+  color: #087553;
+  font-weight: 800;
+}
+
+.donate-action-link {
+  display: inline-block;
+  margin: 0.25rem 0;
+}
+
+.donate-method-answer address {
+  padding: 1rem;
+  font-style: normal;
+  background: #fffdf5;
+  border-left: 4px solid #ffcc67;
+  border-radius: 0.5rem;
+}
+
+.donate-method-answer blockquote {
+  margin: 0.75rem 0;
+  padding: 1rem 1.25rem;
+  background: #fffdf5;
+  border-left: 4px solid #147554;
+  border-radius: 0.5rem;
+}
+
+.donate-small-text {
+  color: #496456;
+  font-size: 0.94rem;
+}
+
+.donate-organization-details {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0;
+}
+
+.donate-organization-details div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
+}
+
+.donate-organization-details dt {
+  font-weight: 800;
+}
+
+.donate-organization-details dd {
+  margin: 0;
+}
+
+.donate-tax-card {
+  text-align: center;
+}
+
+.donate-tax-card p:not(.eyebrow) {
+  max-width: 780px;
+  margin: 0.9rem auto;
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .donate-impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .donate-section-links {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .donate-section-links a {
+    text-align: center;
+  }
+
+  .donate-impact,
+  .donate-methods,
+  .donate-tax-card {
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .donate-method-list summary {
+    padding-left: 1rem;
+  }
+
+  .donate-method-answer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .donate-organization-details div {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
