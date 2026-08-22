@@ -1,5 +1,3 @@
-import "./style.css";
-
 import { Amplify } from "aws-amplify";
 
 import {
@@ -114,8 +112,36 @@ const adoptionDetailContent =
 const closeAdoptionDetailButton =
   document.querySelector("#close-adoption-detail");
 
+const volunteerMessage =
+  document.querySelector("#volunteer-dashboard-message");
+
+const volunteerTableWrapper =
+  document.querySelector("#volunteer-table-wrapper");
+
+const volunteersBody =
+  document.querySelector("#dashboard-volunteers");
+
+const volunteerFilterButtons =
+  document.querySelectorAll("[data-volunteer-view]");
+
+const volunteerDetailPanel =
+  document.querySelector("#volunteer-detail-panel");
+
+const volunteerDetailTitle =
+  document.querySelector("#volunteer-detail-title");
+
+const volunteerDetailId =
+  document.querySelector("#volunteer-detail-id");
+
+const volunteerDetailContent =
+  document.querySelector("#volunteer-detail-content");
+
+const closeVolunteerDetailButton =
+  document.querySelector("#close-volunteer-detail");
+
 let currentSurrenderView = "unreviewed";
 let currentAdoptionView = "unreviewed";
+let currentVolunteerView = "unreviewed";
 loginForm.addEventListener("submit", handleLogin);
 newPasswordForm.addEventListener(
   "submit",
@@ -140,9 +166,29 @@ const saveBirdButton =
 const birdFormMessage =
   document.querySelector("#bird-form-message");
 
+const birdFormEyebrow =
+  document.querySelector("#bird-form-eyebrow");
+
+const birdFormTitle =
+  document.querySelector("#bird-form-title");
+
+const birdFormDescription =
+  document.querySelector("#bird-form-description");
+
+const birdPhotoInput =
+  document.querySelector("#bird-photo");
+
+const birdPhotoLabel =
+  document.querySelector("#bird-photo-label");
+
+const birdPhotoHelp =
+  document.querySelector("#bird-photo-help");
+
+let editingBird = null;
+
 addBirdButton.addEventListener(
   "click",
-  openBirdForm
+  () => openBirdForm()
 );
 
 cancelBirdButton.addEventListener(
@@ -152,7 +198,7 @@ cancelBirdButton.addEventListener(
 
 createBirdForm.addEventListener(
   "submit",
-  handleCreateBird
+  handleBirdFormSubmit
 );
 
 signOutButton.addEventListener("click", handleSignOut);
@@ -181,6 +227,10 @@ dashboardNavigationLinks.forEach((link) => {
     if (sectionName === "adoptions") {
       loadAdoptions(currentAdoptionView);
     }
+
+    if (sectionName === "volunteers") {
+      loadVolunteers(currentVolunteerView);
+    }
   });
 });
 
@@ -204,6 +254,17 @@ adoptionFilterButtons.forEach((button) => {
 closeAdoptionDetailButton.addEventListener(
   "click",
   closeAdoptionDetail
+);
+
+volunteerFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    loadVolunteers(button.dataset.volunteerView);
+  });
+});
+
+closeVolunteerDetailButton.addEventListener(
+  "click",
+  closeVolunteerDetail
 );
 
 async function checkExistingSession() {
@@ -338,11 +399,32 @@ function renderBirds(birds) {
       createCell(bird.birdName),
       createCell(bird.category),
       createCell(bird.species),
-      createVisibilityCell(bird)
+      createVisibilityCell(bird),
+      createBirdActionsCell(bird)
     );
 
     birdsBody.append(row);
   });
+}
+
+function createBirdActionsCell(bird) {
+  const cell = document.createElement("td");
+  const button = document.createElement("button");
+
+  button.type = "button";
+  button.className = "bird-edit-button";
+  button.textContent = "Edit";
+  button.setAttribute(
+    "aria-label",
+    `Edit ${bird.birdName}`
+  );
+
+  button.addEventListener("click", () => {
+    openBirdForm(bird);
+  });
+
+  cell.append(button);
+  return cell;
 }
 
 function createVisibilityCell(bird) {
@@ -690,6 +772,203 @@ async function changeAdoptionDecision(submission, select) {
     select.value = previousValue;
     select.disabled = false;
     adoptionMessage.textContent =
+      error.message || "Unable to save the decision.";
+  }
+}
+
+async function loadVolunteers(view = "unreviewed") {
+  currentVolunteerView = view;
+  closeVolunteerDetail();
+
+  volunteerFilterButtons.forEach((button) => {
+    const isActive = button.dataset.volunteerView === view;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+    button.disabled = true;
+  });
+
+  volunteerMessage.textContent = "Loading volunteer applications...";
+  volunteerTableWrapper.hidden = true;
+  volunteersBody.replaceChildren();
+
+  try {
+    const accessToken = await getDashboardAccessToken();
+    const parameters = new URLSearchParams({
+      formType: "volunteer",
+      view,
+      limit: "100"
+    });
+
+    const response = await fetch(
+      `${API_URL}/admin/submissions?${parameters}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        `Submissions API returned ${response.status}`
+      );
+    }
+
+    const submissions = result.submissions ?? [];
+    renderVolunteers(submissions);
+
+    volunteerMessage.textContent = submissions.length === 0
+      ? view === "unreviewed"
+        ? "There are no unreviewed volunteer applications."
+        : "There are no volunteer applications."
+      : `${submissions.length} volunteer application(s) found.`;
+
+    volunteerTableWrapper.hidden = submissions.length === 0;
+  } catch (error) {
+    console.error(error);
+    volunteerMessage.textContent =
+      error.message || "Unable to load volunteer applications.";
+  } finally {
+    volunteerFilterButtons.forEach((button) => {
+      button.disabled = false;
+    });
+  }
+}
+
+function renderVolunteers(submissions) {
+  volunteersBody.replaceChildren();
+
+  submissions.forEach((submission) => {
+    const row = document.createElement("tr");
+    const actionCell = document.createElement("td");
+    const actionGroup = document.createElement("div");
+    const viewButton = document.createElement("button");
+    const downloadButton = document.createElement("button");
+
+    viewButton.type = "button";
+    viewButton.className =
+      "submission-action-button submission-action-button--view";
+    viewButton.textContent = "View";
+    viewButton.addEventListener("click", () => {
+      loadVolunteerDetail(submission.submissionId);
+    });
+
+    downloadButton.type = "button";
+    downloadButton.className =
+      "submission-action-button submission-action-button--download";
+    downloadButton.textContent = "Download";
+    downloadButton.addEventListener("click", () => {
+      downloadVolunteerSubmission(
+        submission.submissionId,
+        downloadButton
+      );
+    });
+
+    actionGroup.className = "submission-row-actions";
+    actionGroup.append(viewButton, downloadButton);
+    actionCell.append(actionGroup);
+
+    row.append(
+      createCell(formatSubmissionDate(submission.submittedAt)),
+      createCell(submission.applicantName),
+      createCell(submission.applicantEmail),
+      createStatusCell(submission.reviewStatus),
+      createVolunteerDecisionCell(submission),
+      actionCell
+    );
+
+    volunteersBody.append(row);
+  });
+}
+
+function createVolunteerDecisionCell(submission) {
+  const cell = document.createElement("td");
+  const select = document.createElement("select");
+
+  select.className = "submission-decision-select";
+  select.setAttribute(
+    "aria-label",
+    `Decision for ${submission.applicantName || "volunteer application"}`
+  );
+
+  [
+    ["", "Choose..."],
+    ["accepted", "Accepted"],
+    ["rejected", "Rejected"]
+  ].forEach(([value, label]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    select.append(option);
+  });
+
+  select.value = ["accepted", "rejected"].includes(submission.decision)
+    ? submission.decision
+    : "";
+
+  select.dataset.previousValue = select.value;
+  select.classList.toggle("is-accepted", select.value === "accepted");
+  select.classList.toggle("is-rejected", select.value === "rejected");
+
+  select.addEventListener("change", () => {
+    if (select.value) {
+      changeVolunteerDecision(submission, select);
+    }
+  });
+
+  cell.append(select);
+  return cell;
+}
+
+async function changeVolunteerDecision(submission, select) {
+  const decision = select.value;
+  const previousValue = select.dataset.previousValue || "";
+  const confirmed = window.confirm(
+    `Mark the volunteer application from ${submission.applicantName || "this applicant"} as ${decision}? ` +
+    "This will also mark the application as reviewed."
+  );
+
+  if (!confirmed) {
+    select.value = previousValue;
+    return;
+  }
+
+  select.disabled = true;
+  volunteerMessage.textContent = `Saving ${decision} decision...`;
+
+  try {
+    const accessToken = await getDashboardAccessToken();
+    const response = await fetch(
+      `${API_URL}/admin/submissions/${encodeURIComponent(submission.submissionId)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ decision })
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        `Submissions API returned ${response.status}`
+      );
+    }
+
+    await loadVolunteers(currentVolunteerView);
+    volunteerMessage.textContent = result.message;
+  } catch (error) {
+    console.error(error);
+    select.value = previousValue;
+    select.disabled = false;
+    volunteerMessage.textContent =
       error.message || "Unable to save the decision.";
   }
 }
@@ -1049,6 +1328,111 @@ function formatAdoptionDownload(submission) {
   return lines.join("\r\n");
 }
 
+async function loadVolunteerDetail(submissionId) {
+  volunteerDetailPanel.hidden = false;
+  volunteerDetailTitle.textContent = "Loading application...";
+  volunteerDetailId.textContent = submissionId;
+  volunteerDetailContent.replaceChildren();
+
+  volunteerDetailPanel.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  try {
+    const submission = await fetchSubmission(submissionId);
+    renderVolunteerDetail(submission);
+  } catch (error) {
+    console.error(error);
+    volunteerDetailTitle.textContent = "Unable to load application";
+
+    const message = document.createElement("p");
+    message.className = "submission-detail-error";
+    message.textContent =
+      error.message || "Unable to load this volunteer application.";
+    volunteerDetailContent.append(message);
+  }
+}
+
+async function downloadVolunteerSubmission(submissionId, button) {
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "Preparing...";
+
+  try {
+    const submission = await fetchSubmission(submissionId);
+    const fileContent = formatVolunteerDownload(submission);
+    const blob = new Blob([fileContent], {
+      type: "text/plain;charset=utf-8"
+    });
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const safeApplicantName =
+      (submission.applicantName || "volunteer-application")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
+    link.href = downloadUrl;
+    link.download =
+      `${safeApplicantName || "volunteer-application"}-${submission.submissionId}.txt`;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(downloadUrl);
+  } catch (error) {
+    console.error(error);
+    volunteerMessage.textContent =
+      error.message || "Unable to download the application.";
+  } finally {
+    button.disabled = false;
+    button.textContent = originalText;
+  }
+}
+
+function formatVolunteerDownload(submission) {
+  const lines = [
+    "FEATHERED FRIENDS SANCTUARY & RESCUE, INC.",
+    "VOLUNTEER APPLICATION",
+    "",
+    `Submission ID: ${submission.submissionId}`,
+    `Submitted: ${formatSubmissionDate(submission.submittedAt)}`,
+    `Review status: ${formatAnswer(submission.reviewStatus)}`,
+    `Decision: ${formatAnswer(submission.decision)}`,
+    ""
+  ];
+
+  const sections = [
+    ["CONTACT INFORMATION", submission.contact],
+    ["CHILDREN AND HOUSEHOLD", submission.children],
+    ["AVAILABILITY", submission.availability],
+    ["EXPERIENCE", submission.experience],
+    ["VOLUNTEER INTERESTS", submission.tasks],
+    ["ADDITIONAL INFORMATION", submission.additional],
+    ["LIABILITY AGREEMENT", submission.liability],
+    ["CONFIDENTIALITY AGREEMENT", submission.confidentiality],
+    ["MEDIA RELEASE", submission.mediaRelease]
+  ];
+
+  sections.forEach(([title, values]) => {
+    if (!values || Object.keys(values).length === 0) {
+      return;
+    }
+
+    lines.push(title, "-".repeat(title.length));
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value !== "" && value !== null && value !== undefined) {
+        lines.push(`${friendlyFieldName(key)}: ${formatAnswer(value)}`);
+      }
+    });
+
+    lines.push("");
+  });
+
+  return lines.join("\r\n");
+}
+
 function renderSurrenderDetail(submission) {
   surrenderDetailTitle.textContent =
     `${submission.birdName || "Unnamed bird"} - ${submission.applicantName || "Unknown applicant"}`;
@@ -1126,6 +1510,42 @@ function renderAdoptionDetail(submission) {
   });
 }
 
+function renderVolunteerDetail(submission) {
+  volunteerDetailTitle.textContent =
+    submission.applicantName || "Unknown applicant";
+  volunteerDetailId.textContent = submission.submissionId;
+  volunteerDetailContent.replaceChildren();
+
+  const summary = {
+    submittedAt: formatSubmissionDate(submission.submittedAt),
+    reviewStatus: submission.reviewStatus,
+    decision: submission.decision,
+    applicantName: submission.applicantName,
+    applicantEmail: submission.applicantEmail
+  };
+
+  const sections = [
+    ["Application summary", summary],
+    ["Contact information", submission.contact],
+    ["Children and household", submission.children],
+    ["Availability", submission.availability],
+    ["Experience", submission.experience],
+    ["Volunteer interests", submission.tasks],
+    ["Additional information", submission.additional],
+    ["Liability agreement", submission.liability],
+    ["Confidentiality agreement", submission.confidentiality],
+    ["Media release", submission.mediaRelease]
+  ];
+
+  sections.forEach(([title, values]) => {
+    if (values && Object.keys(values).length > 0) {
+      volunteerDetailContent.append(
+        createSubmissionDetailSection(title, values)
+      );
+    }
+  });
+}
+
 function createSubmissionDetailSection(title, values) {
   const section = document.createElement("section");
   const heading = document.createElement("h3");
@@ -1196,6 +1616,13 @@ function closeAdoptionDetail() {
   adoptionDetailTitle.textContent = "Application details";
   adoptionDetailId.textContent = "";
   adoptionDetailContent.replaceChildren();
+}
+
+function closeVolunteerDetail() {
+  volunteerDetailPanel.hidden = true;
+  volunteerDetailTitle.textContent = "Application details";
+  volunteerDetailId.textContent = "";
+  volunteerDetailContent.replaceChildren();
 }
 
 async function changePublishStatus(bird, button) {
@@ -1346,7 +1773,39 @@ function closeDashboardMenu() {
   );
 }
 
-function openBirdForm() {
+function openBirdForm(bird = null) {
+  editingBird = bird;
+  createBirdForm.reset();
+
+  if (editingBird) {
+    birdFormEyebrow.textContent = "Edit profile";
+    birdFormTitle.textContent = `Edit ${editingBird.birdName}`;
+    birdFormDescription.textContent =
+      "Update this bird's profile. Choose a new photo only if you want to replace the current one.";
+    birdPhotoLabel.textContent = "Replacement photo (optional)";
+    birdPhotoHelp.textContent =
+      "Take a new photo or choose one to replace the current image.";
+    birdPhotoInput.required = false;
+    saveBirdButton.textContent = "Save changes";
+
+    createBirdForm.elements.namedItem("birdName").value =
+      editingBird.birdName ?? "";
+    createBirdForm.elements.namedItem("category").value =
+      editingBird.category ?? "";
+    createBirdForm.elements.namedItem("species").value =
+      editingBird.species ?? "";
+    createBirdForm.elements.namedItem("ageText").value =
+      editingBird.ageText ?? "";
+    createBirdForm.elements.namedItem("sex").value =
+      editingBird.sex ?? "";
+    createBirdForm.elements.namedItem("shortDescription").value =
+      editingBird.shortDescription ?? "";
+    createBirdForm.elements.namedItem("fullDescription").value =
+      editingBird.fullDescription ?? "";
+  } else {
+    resetBirdFormMode();
+  }
+
   birdFormPanel.hidden = false;
   birdFormMessage.textContent = "";
 
@@ -1362,15 +1821,31 @@ function closeBirdForm() {
   birdFormPanel.hidden = true;
   birdFormMessage.textContent = "";
   createBirdForm.reset();
+  resetBirdFormMode();
 }
 
-async function handleCreateBird(event) {
+function resetBirdFormMode() {
+  editingBird = null;
+  birdFormEyebrow.textContent = "New profile";
+  birdFormTitle.textContent = "Add a bird";
+  birdFormDescription.textContent =
+    "Create an unpublished bird profile and upload its photo.";
+  birdPhotoLabel.textContent = "Photo *";
+  birdPhotoHelp.textContent =
+    "Take a new photo or choose one from your device.";
+  birdPhotoInput.required = true;
+  saveBirdButton.textContent = "Save draft";
+}
+
+async function handleBirdFormSubmit(event) {
   event.preventDefault();
 
   const formData = new FormData(createBirdForm);
   const photo = formData.get("birdPhoto");
+  const hasPhoto =
+    photo instanceof File && photo.size > 0;
 
-  if (!(photo instanceof File) || photo.size === 0) {
+  if (!editingBird && !hasPhoto) {
     birdFormMessage.textContent =
       "Choose or take a photo before saving.";
     return;
@@ -1378,15 +1853,17 @@ async function handleCreateBird(event) {
 
   const maxFileSize = 25 * 1024 * 1024;
 
-  if (photo.size > maxFileSize) {
+  if (hasPhoto && photo.size > maxFileSize) {
     birdFormMessage.textContent =
       "The photo must be 25 MB or smaller.";
     return;
   }
 
-  const contentType = getImageContentType(photo);
+  const contentType = hasPhoto
+    ? getImageContentType(photo)
+    : null;
 
-  if (!contentType) {
+  if (hasPhoto && !contentType) {
     birdFormMessage.textContent =
       "Use a JPEG, PNG, WebP, HEIC or HEIF image.";
     return;
@@ -1394,7 +1871,9 @@ async function handleCreateBird(event) {
 
   saveBirdButton.disabled = true;
   saveBirdButton.textContent = "Saving...";
-  birdFormMessage.textContent = "Creating draft...";
+  birdFormMessage.textContent = editingBird
+    ? "Saving changes..."
+    : "Creating draft...";
 
   const birdData = {
     birdName: formData.get("birdName"),
@@ -1408,7 +1887,8 @@ async function handleCreateBird(event) {
       formData.get("fullDescription")
   };
 
-  let createdBird;
+  const birdBeingEdited = editingBird;
+  let savedBird;
 
   try {
     const session = await fetchAuthSession();
@@ -1420,10 +1900,16 @@ async function handleCreateBird(event) {
       throw new Error("Your session has expired.");
     }
 
-    const createResponse = await fetch(
-      `${API_URL}/admin/birds`,
+    const requestUrl = birdBeingEdited
+      ? `${API_URL}/admin/birds/${encodeURIComponent(
+        birdBeingEdited.birdId
+      )}`
+      : `${API_URL}/admin/birds`;
+
+    const saveResponse = await fetch(
+      requestUrl,
       {
-        method: "POST",
+        method: birdBeingEdited ? "PATCH" : "POST",
 
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -1434,61 +1920,74 @@ async function handleCreateBird(event) {
       }
     );
 
-    const createResult = await createResponse.json();
+    const saveResult = await saveResponse.json();
 
-    if (!createResponse.ok) {
+    if (!saveResponse.ok) {
       const missingFields =
-        createResult.fields?.length > 0
-          ? ` Missing: ${createResult.fields.join(", ")}.`
+        saveResult.fields?.length > 0
+          ? ` Missing: ${saveResult.fields.join(", ")}.`
           : "";
 
       throw new Error(
-        `${createResult.message ??
-        "Unable to create bird."}${missingFields}`
+        `${saveResult.message ??
+        "Unable to save bird."}${missingFields}`
       );
     }
 
-    createdBird = createResult.bird;
+    savedBird = saveResult.bird;
 
-    birdFormMessage.textContent =
-      "Uploading original photo...";
+    if (hasPhoto) {
+      birdFormMessage.textContent = birdBeingEdited
+        ? "Uploading replacement photo..."
+        : "Uploading original photo...";
 
-    await uploadOriginalBirdPhoto({
-      birdId: createdBird.birdId,
-      photo,
-      contentType,
-      accessToken
-    });
+      await uploadOriginalBirdPhoto({
+        birdId: savedBird.birdId,
+        photo,
+        contentType,
+        accessToken
+      });
+    }
 
     closeBirdForm();
     await showDashboard();
 
-    dashboardMessage.textContent =
-      `${createdBird.birdName} was created and the original photo was uploaded.`;
+    if (birdBeingEdited) {
+      dashboardMessage.textContent = hasPhoto
+        ? `${savedBird.birdName} was updated and the replacement photo was uploaded for processing.`
+        : `${savedBird.birdName} was updated.`;
+    } else {
+      dashboardMessage.textContent =
+        `${savedBird.birdName} was created and the original photo was uploaded.`;
+    }
   } catch (error) {
     console.error(error);
 
     /*
-     * If DynamoDB creation worked but S3 uploading failed,
-     * close the form to prevent creating a duplicate bird
-     * by submitting it again.
+     * The database save succeeded but the optional S3 upload failed.
+     * Close the form so an Add submission cannot create a duplicate bird.
      */
-    if (createdBird) {
+    if (savedBird) {
       closeBirdForm();
       await showDashboard();
 
       dashboardMessage.textContent =
-        `${createdBird.birdName} was created as a draft, ` +
+        `${savedBird.birdName} was saved, ` +
         `but the photo upload failed: ${error.message}`;
 
       return;
     }
 
     birdFormMessage.textContent =
-      error.message || "Unable to create the bird.";
+      error.message || "Unable to save the bird.";
   } finally {
     saveBirdButton.disabled = false;
-    saveBirdButton.textContent = "Save draft";
+
+    if (!birdFormPanel.hidden) {
+      saveBirdButton.textContent = editingBird
+        ? "Save changes"
+        : "Save draft";
+    }
   }
 }
 

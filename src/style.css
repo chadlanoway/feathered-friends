@@ -354,9 +354,9 @@ h1 {
   display: block;
   width: 150px;
   height: 150px;
+  margin: 0 auto 1rem;
   object-fit: contain;
   opacity: 0.8;
-
 }
 
 .about-logo {
@@ -1221,6 +1221,7 @@ h1 {
 }
 
 .dashboard-shell {
+  display: flow-root;
   min-height: 100vh;
 }
 
@@ -1444,6 +1445,29 @@ h1 {
   cursor: wait;
   opacity: 0.6;
   transform: none;
+}
+
+.bird-edit-button {
+  min-width: 92px;
+  padding: 0.65rem 1rem;
+  color: #17321f;
+  background-color: #ffcc67;
+  border: 2px solid #ffcc67;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.bird-edit-button:hover,
+.bird-edit-button:focus-visible {
+  background-color: #ffe09b;
+  box-shadow: 0 6px 16px rgba(23, 50, 31, 0.18);
+  transform: translateY(-2px);
 }
 
 /* Add bird form */

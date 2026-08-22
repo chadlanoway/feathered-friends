@@ -4,12 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/style.css">
     <title>Bird Dashboard | Feathered Friends</title>
 </head>
 
 <body class="dashboard-body">
     <main class="dashboard-shell">
         <section id="login-panel">
+
+            <img class="mission-logo" src="/images/fflogo.png" alt="Feathered Friends logo" />
+
             <p class="eyebrow">Feathered Friends</p>
             <h1>Dashboard sign in</h1>
 
@@ -112,11 +116,10 @@
                     <section id="bird-form-panel" class="bird-form-panel" aria-labelledby="bird-form-title" hidden>
                         <header class="bird-form-header">
                             <div>
-                                <p class="eyebrow">New profile</p>
+                                <p id="bird-form-eyebrow" class="eyebrow">New profile</p>
                                 <h2 id="bird-form-title">Add a bird</h2>
-                                <p>
-                                    Save the bird as an unpublished draft.
-                                    Photos can be added afterward.
+                                <p id="bird-form-description">
+                                    Create an unpublished bird profile and upload its photo.
                                 </p>
                             </div>
                         </header>
@@ -168,13 +171,14 @@
                                 </label>
 
                                 <label class="form-field form-field--wide">
-                                    <span>Photo *</span>
+                                    <span id="bird-photo-label">Photo *</span>
 
                                     <input id="bird-photo" name="birdPhoto" type="file" accept="image/*"
                                         capture="environment" required>
 
                                     <small class="form-help">
-                                        Take a new photo or choose one from your device.
+                                        <span id="bird-photo-help">Take a new photo or choose one from your
+                                            device.</span>
                                         Maximum file size: 25 MB.
                                     </small>
                                 </label>
@@ -187,8 +191,9 @@
 
                                 <label class="form-field form-field--wide">
                                     <span>Full description *</span>
-                                    <textarea name="fullDescription" rows="8" maxlength="5000"
-                                        placeholder="The bird's complete adoption description." required></textarea>
+                                    <textarea name="fullDescription" rows="10" maxlength="5000"
+                                        placeholder="The bird's complete adoption description.&#10;&#10;Physical condition:&#10;&#10;Personality:&#10;&#10;Background and points of interest (for example: has lived with dogs, prefers women, etc.):"
+                                        required></textarea>
                                 </label>
                             </div>
 
@@ -218,6 +223,7 @@
                                     <th>Category</th>
                                     <th>Species</th>
                                     <th>Website visibility</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 
@@ -240,13 +246,63 @@
 
                 <section id="dashboard-section-volunteers" class="dashboard-section" data-dashboard-panel="volunteers"
                     hidden>
-                    <div class="dashboard-placeholder">
-                        <p class="eyebrow">Volunteer management</p>
-                        <h1>Volunteers</h1>
-                        <p>
-                            Volunteer applications and records will appear here.
-                        </p>
+                    <header class="dashboard-section-header surrender-dashboard-header">
+                        <div>
+                            <p class="eyebrow">Volunteer management</p>
+                            <h1>Volunteers</h1>
+                            <p>Review volunteer applications submitted through the public website.</p>
+                        </div>
+
+                        <div class="submission-filters" aria-label="Volunteer application filters">
+                            <button class="submission-filter is-active" type="button" data-volunteer-view="unreviewed"
+                                aria-pressed="true">
+                                Unreviewed
+                            </button>
+
+                            <button class="submission-filter" type="button" data-volunteer-view="all"
+                                aria-pressed="false">
+                                All
+                            </button>
+                        </div>
+                    </header>
+
+                    <p id="volunteer-dashboard-message" class="submission-message" role="status">
+                        Select Volunteers to load applications.
+                    </p>
+
+                    <div id="volunteer-table-wrapper" class="dashboard-table-wrapper" hidden>
+                        <table class="dashboard-table surrender-table">
+                            <thead>
+                                <tr>
+                                    <th>Submitted</th>
+                                    <th>Applicant</th>
+                                    <th>Email</th>
+                                    <th>Review</th>
+                                    <th>Decision</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="dashboard-volunteers"></tbody>
+                        </table>
                     </div>
+
+                    <section id="volunteer-detail-panel" class="submission-detail-panel"
+                        aria-labelledby="volunteer-detail-title" hidden>
+                        <header class="submission-detail-header">
+                            <div>
+                                <p class="eyebrow">Volunteer application</p>
+                                <h2 id="volunteer-detail-title">Application details</h2>
+                                <p id="volunteer-detail-id" class="submission-detail-id"></p>
+                            </div>
+
+                            <button id="close-volunteer-detail" class="form-secondary-button" type="button">
+                                Close details
+                            </button>
+                        </header>
+
+                        <div id="volunteer-detail-content"></div>
+                    </section>
                 </section>
 
                 <section id="dashboard-section-adoptions" class="dashboard-section" data-dashboard-panel="adoptions"
