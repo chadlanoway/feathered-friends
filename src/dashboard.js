@@ -58,6 +58,33 @@ const dashboardNavigationLinks =
 const dashboardSections =
   document.querySelectorAll("[data-dashboard-panel]");
 
+const boardingMessage =
+  document.querySelector("#boarding-dashboard-message");
+
+const boardingTableWrapper =
+  document.querySelector("#boarding-table-wrapper");
+
+const boardingsBody =
+  document.querySelector("#dashboard-boardings");
+
+const boardingFilterButtons =
+  document.querySelectorAll("[data-boarding-view]");
+
+const boardingDetailPanel =
+  document.querySelector("#boarding-detail-panel");
+
+const boardingDetailTitle =
+  document.querySelector("#boarding-detail-title");
+
+const boardingDetailId =
+  document.querySelector("#boarding-detail-id");
+
+const boardingDetailContent =
+  document.querySelector("#boarding-detail-content");
+
+const closeBoardingDetailButton =
+  document.querySelector("#close-boarding-detail");
+
 const surrenderMessage =
   document.querySelector("#surrender-dashboard-message");
 
@@ -139,6 +166,7 @@ const volunteerDetailContent =
 const closeVolunteerDetailButton =
   document.querySelector("#close-volunteer-detail");
 
+let currentBoardingView = "unreviewed";
 let currentSurrenderView = "unreviewed";
 let currentAdoptionView = "unreviewed";
 let currentVolunteerView = "unreviewed";
@@ -220,6 +248,10 @@ dashboardNavigationLinks.forEach((link) => {
     showDashboardSection(sectionName);
     closeDashboardMenu();
 
+    if (sectionName === "boarding") {
+      loadBoardings(currentBoardingView);
+    }
+
     if (sectionName === "surrenders") {
       loadSurrenders(currentSurrenderView);
     }
@@ -233,6 +265,17 @@ dashboardNavigationLinks.forEach((link) => {
     }
   });
 });
+
+boardingFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    loadBoardings(button.dataset.boardingView);
+  });
+});
+
+closeBoardingDetailButton.addEventListener(
+  "click",
+  closeBoardingDetail
+);
 
 surrenderFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -477,6 +520,205 @@ async function getDashboardAccessToken() {
   }
 
   return accessToken;
+}
+
+async function loadBoardings(view = "unreviewed") {
+  currentBoardingView = view;
+  closeBoardingDetail();
+
+  boardingFilterButtons.forEach((button) => {
+    const isActive = button.dataset.boardingView === view;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+    button.disabled = true;
+  });
+
+  boardingMessage.textContent = "Loading boarding requests...";
+  boardingTableWrapper.hidden = true;
+  boardingsBody.replaceChildren();
+
+  try {
+    const accessToken = await getDashboardAccessToken();
+    const parameters = new URLSearchParams({
+      formType: "boarding",
+      view,
+      limit: "100"
+    });
+
+    const response = await fetch(
+      `${API_URL}/admin/submissions?${parameters}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        `Submissions API returned ${response.status}`
+      );
+    }
+
+    const submissions = result.submissions ?? [];
+    renderBoardings(submissions);
+
+    boardingMessage.textContent = submissions.length === 0
+      ? view === "unreviewed"
+        ? "There are no unreviewed boarding requests."
+        : "There are no boarding requests."
+      : `${submissions.length} boarding request(s) found.`;
+
+    boardingTableWrapper.hidden = submissions.length === 0;
+  } catch (error) {
+    console.error(error);
+    boardingMessage.textContent =
+      error.message || "Unable to load boarding requests.";
+  } finally {
+    boardingFilterButtons.forEach((button) => {
+      button.disabled = false;
+    });
+  }
+}
+
+function renderBoardings(submissions) {
+  boardingsBody.replaceChildren();
+
+  submissions.forEach((submission) => {
+    const row = document.createElement("tr");
+    const actionCell = document.createElement("td");
+    const actionGroup = document.createElement("div");
+    const viewButton = document.createElement("button");
+    const downloadButton = document.createElement("button");
+
+    viewButton.type = "button";
+    viewButton.className =
+      "submission-action-button submission-action-button--view";
+    viewButton.textContent = "View";
+    viewButton.addEventListener("click", () => {
+      loadBoardingDetail(submission.submissionId);
+    });
+
+    downloadButton.type = "button";
+    downloadButton.className =
+      "submission-action-button submission-action-button--download";
+    downloadButton.textContent = "Download";
+    downloadButton.addEventListener("click", () => {
+      downloadBoardingSubmission(
+        submission.submissionId,
+        downloadButton
+      );
+    });
+
+    actionGroup.className = "submission-row-actions";
+    actionGroup.append(viewButton, downloadButton);
+    actionCell.append(actionGroup);
+
+    row.append(
+      createCell(formatSubmissionDate(submission.submittedAt)),
+      createCell(submission.applicantName),
+      createCell(submission.birdName),
+      createCell(submission.birdSpecies),
+      createCell(submission.applicantEmail),
+      createStatusCell(submission.reviewStatus),
+      createBoardingDecisionCell(submission),
+      actionCell
+    );
+
+    boardingsBody.append(row);
+  });
+}
+
+function createBoardingDecisionCell(submission) {
+  const cell = document.createElement("td");
+  const select = document.createElement("select");
+
+  select.className = "submission-decision-select";
+  select.setAttribute(
+    "aria-label",
+    `Decision for ${submission.birdName || "boarding request"}`
+  );
+
+  [
+    ["", "Choose..."],
+    ["accepted", "Accepted"],
+    ["rejected", "Rejected"]
+  ].forEach(([value, label]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    select.append(option);
+  });
+
+  select.value = ["accepted", "rejected"].includes(submission.decision)
+    ? submission.decision
+    : "";
+
+  select.dataset.previousValue = select.value;
+  select.classList.toggle("is-accepted", select.value === "accepted");
+  select.classList.toggle("is-rejected", select.value === "rejected");
+
+  select.addEventListener("change", () => {
+    if (select.value) {
+      changeBoardingDecision(submission, select);
+    }
+  });
+
+  cell.append(select);
+  return cell;
+}
+
+async function changeBoardingDecision(submission, select) {
+  const decision = select.value;
+  const previousValue = select.dataset.previousValue || "";
+  const confirmed = window.confirm(
+    `Mark the boarding request for ${submission.birdName || "this bird"} as ${decision}? ` +
+    "This will also mark the request as reviewed."
+  );
+
+  if (!confirmed) {
+    select.value = previousValue;
+    return;
+  }
+
+  select.disabled = true;
+  boardingMessage.textContent = `Saving ${decision} decision...`;
+
+  try {
+    const accessToken = await getDashboardAccessToken();
+    const response = await fetch(
+      `${API_URL}/admin/submissions/${encodeURIComponent(submission.submissionId)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ decision })
+      }
+    );
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        `Submissions API returned ${response.status}`
+      );
+    }
+
+    await loadBoardings(currentBoardingView);
+    boardingMessage.textContent = result.message;
+  } catch (error) {
+    console.error(error);
+    select.value = previousValue;
+    select.disabled = false;
+    boardingMessage.textContent =
+      error.message || "Unable to save the decision.";
+  }
 }
 
 async function loadSurrenders(view = "unreviewed") {
@@ -1098,6 +1340,109 @@ function formatSubmissionDate(value) {
   }).format(date);
 }
 
+async function loadBoardingDetail(submissionId) {
+  boardingDetailPanel.hidden = false;
+  boardingDetailTitle.textContent = "Loading request...";
+  boardingDetailId.textContent = submissionId;
+  boardingDetailContent.replaceChildren();
+
+  boardingDetailPanel.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  try {
+    const submission = await fetchSubmission(submissionId);
+    renderBoardingDetail(submission);
+  } catch (error) {
+    console.error(error);
+    boardingDetailTitle.textContent = "Unable to load request";
+
+    const message = document.createElement("p");
+    message.className = "submission-detail-error";
+    message.textContent =
+      error.message || "Unable to load this boarding request.";
+    boardingDetailContent.append(message);
+  }
+}
+
+async function downloadBoardingSubmission(submissionId, button) {
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "Preparing...";
+
+  try {
+    const submission = await fetchSubmission(submissionId);
+    const fileContent = formatBoardingDownload(submission);
+    const blob = new Blob([fileContent], {
+      type: "text/plain;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const safeBirdName = (submission.birdName || "boarding")
+      .replace(/[^a-z0-9]+/gi, "-")
+      .replace(/^-+|-+$/g, "")
+      .toLowerCase();
+
+    link.href = url;
+    link.download =
+      `${safeBirdName || "boarding"}-${submission.submissionId}.txt`;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error(error);
+    boardingMessage.textContent =
+      error.message || "Unable to download the boarding request.";
+  } finally {
+    button.disabled = false;
+    button.textContent = originalText;
+  }
+}
+
+function formatBoardingDownload(submission) {
+  const lines = [
+    "FEATHERED FRIENDS BOARDING REQUEST",
+    "",
+    `Submission ID: ${submission.submissionId}`,
+    `Submitted: ${formatSubmissionDate(submission.submittedAt)}`,
+    `Review status: ${formatAnswer(submission.reviewStatus)}`,
+    `Decision: ${formatAnswer(submission.decision)}`,
+    ""
+  ];
+
+  const sections = [
+    ["BIRD INFORMATION", submission.bird],
+    ["OWNER", submission.owner],
+    ["EMERGENCY CONTACT", submission.emergencyContact],
+    ["VETERINARIAN", submission.veterinarian],
+    ["HEALTH", submission.health],
+    ["DISEASE TESTING", submission.diseaseTesting],
+    ["ANIMAL EXPOSURE", submission.exposure],
+    ["DIET", submission.diet],
+    ["REQUESTED CARE", submission.care],
+    ["BELONGINGS", submission.belongings],
+    ["ADDITIONAL INFORMATION", submission.additionalInformation],
+    ["BOARDING SCHEDULE", submission.schedule],
+    ["AGREEMENT", submission.agreement]
+  ];
+
+  sections.forEach(([title, values]) => {
+    if (!values || Object.keys(values).length === 0) {
+      return;
+    }
+
+    lines.push(title);
+    Object.entries(values).forEach(([key, value]) => {
+      lines.push(`${friendlyFieldName(key)}: ${formatAnswer(value)}`);
+    });
+    lines.push("");
+  });
+
+  return lines.join("\n");
+}
+
 async function loadSurrenderDetail(submissionId) {
   surrenderDetailPanel.hidden = false;
   surrenderDetailTitle.textContent = "Loading submission...";
@@ -1433,6 +1778,49 @@ function formatVolunteerDownload(submission) {
   return lines.join("\r\n");
 }
 
+function renderBoardingDetail(submission) {
+  boardingDetailTitle.textContent =
+    `${submission.birdName || "Unnamed bird"} - ` +
+    `${submission.applicantName || "Unknown owner"}`;
+  boardingDetailId.textContent = submission.submissionId;
+  boardingDetailContent.replaceChildren();
+
+  const summary = {
+    submittedAt: formatSubmissionDate(submission.submittedAt),
+    reviewStatus: submission.reviewStatus,
+    decision: submission.decision,
+    applicantName: submission.applicantName,
+    applicantEmail: submission.applicantEmail,
+    birdName: submission.birdName,
+    birdSpecies: submission.birdSpecies
+  };
+
+  const sections = [
+    ["Request summary", summary],
+    ["Bird information", submission.bird],
+    ["Owner", submission.owner],
+    ["Emergency contact", submission.emergencyContact],
+    ["Veterinarian", submission.veterinarian],
+    ["Health", submission.health],
+    ["Disease testing", submission.diseaseTesting],
+    ["Animal exposure", submission.exposure],
+    ["Diet", submission.diet],
+    ["Requested care", submission.care],
+    ["Belongings", submission.belongings],
+    ["Additional information", submission.additionalInformation],
+    ["Boarding schedule", submission.schedule],
+    ["Agreement", submission.agreement]
+  ];
+
+  sections.forEach(([title, values]) => {
+    if (values && Object.keys(values).length > 0) {
+      boardingDetailContent.append(
+        createSubmissionDetailSection(title, values)
+      );
+    }
+  });
+}
+
 function renderSurrenderDetail(submission) {
   surrenderDetailTitle.textContent =
     `${submission.birdName || "Unnamed bird"} - ${submission.applicantName || "Unknown applicant"}`;
@@ -1609,6 +1997,13 @@ function closeSurrenderDetail() {
   surrenderDetailTitle.textContent = "Submission details";
   surrenderDetailId.textContent = "";
   surrenderDetailContent.replaceChildren();
+}
+
+function closeBoardingDetail() {
+  boardingDetailPanel.hidden = true;
+  boardingDetailTitle.textContent = "Request details";
+  boardingDetailId.textContent = "";
+  boardingDetailContent.replaceChildren();
 }
 
 function closeAdoptionDetail() {

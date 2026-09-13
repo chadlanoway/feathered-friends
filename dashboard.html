@@ -233,14 +233,65 @@
 
                 <section id="dashboard-section-boarding" class="dashboard-section" data-dashboard-panel="boarding"
                     hidden>
-                    <div class="dashboard-placeholder">
-                        <p class="eyebrow">Boarding management</p>
-                        <h1>Boarding</h1>
-                        <p>
-                            Boarding requests and intake information will
-                            appear here.
-                        </p>
+                    <header class="dashboard-section-header surrender-dashboard-header">
+                        <div>
+                            <p class="eyebrow">Boarding management</p>
+                            <h1>Boarding</h1>
+                            <p>Review boarding requests submitted through the public website.</p>
+                        </div>
+
+                        <div class="submission-filters" aria-label="Boarding request filters">
+                            <button class="submission-filter is-active" type="button" data-boarding-view="unreviewed"
+                                aria-pressed="true">
+                                Unreviewed
+                            </button>
+
+                            <button class="submission-filter" type="button" data-boarding-view="all"
+                                aria-pressed="false">
+                                All
+                            </button>
+                        </div>
+                    </header>
+
+                    <p id="boarding-dashboard-message" class="submission-message" role="status">
+                        Select Boarding to load requests.
+                    </p>
+
+                    <div id="boarding-table-wrapper" class="dashboard-table-wrapper" hidden>
+                        <table class="dashboard-table surrender-table">
+                            <thead>
+                                <tr>
+                                    <th>Submitted</th>
+                                    <th>Owner</th>
+                                    <th>Bird</th>
+                                    <th>Species</th>
+                                    <th>Email</th>
+                                    <th>Review</th>
+                                    <th>Decision</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="dashboard-boardings"></tbody>
+                        </table>
                     </div>
+
+                    <section id="boarding-detail-panel" class="submission-detail-panel"
+                        aria-labelledby="boarding-detail-title" hidden>
+                        <header class="submission-detail-header">
+                            <div>
+                                <p class="eyebrow">Boarding request</p>
+                                <h2 id="boarding-detail-title">Request details</h2>
+                                <p id="boarding-detail-id" class="submission-detail-id"></p>
+                            </div>
+
+                            <button id="close-boarding-detail" class="form-secondary-button" type="button">
+                                Close details
+                            </button>
+                        </header>
+
+                        <div id="boarding-detail-content"></div>
+                    </section>
                 </section>
 
                 <section id="dashboard-section-volunteers" class="dashboard-section" data-dashboard-panel="volunteers"
