@@ -1827,6 +1827,10 @@ function renderSurrenderDetail(submission) {
   surrenderDetailId.textContent = submission.submissionId;
   surrenderDetailContent.replaceChildren();
 
+  surrenderDetailContent.append(
+    createSurrenderNotesSection(submission)
+  );
+
   const summary = {
     submittedAt: formatSubmissionDate(submission.submittedAt),
     reviewStatus: submission.reviewStatus,
@@ -1856,6 +1860,126 @@ function renderSurrenderDetail(submission) {
       );
     }
   });
+}
+
+function createSurrenderNotesSection(submission) {
+  const section = document.createElement("section");
+  section.className = "submission-detail-section surrender-notes-section";
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Staff notes";
+  section.append(heading);
+
+  const notes = Array.isArray(submission.notes)
+    ? [...submission.notes].sort((firstNote, secondNote) =>
+        String(secondNote?.createdAt ?? "").localeCompare(
+          String(firstNote?.createdAt ?? "")
+        )
+      )
+    : [];
+
+  if (notes.length === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.textContent = "No notes have been added.";
+    section.append(emptyMessage);
+  } else {
+    const notesList = document.createElement("dl");
+
+    notes.forEach((note) => {
+      const timestamp = document.createElement("dt");
+      timestamp.textContent = note?.createdAt
+        ? formatSubmissionDate(note.createdAt)
+        : "Date unavailable";
+
+      const content = document.createElement("dd");
+      content.textContent = note?.content || "";
+
+      notesList.append(timestamp, content);
+    });
+
+    section.append(notesList);
+  }
+
+  const form = document.createElement("form");
+  form.className = "submission-note-form";
+
+  const label = document.createElement("label");
+  label.className = "form-field";
+
+  const labelText = document.createElement("span");
+  labelText.textContent = "Add a note";
+
+  const textarea = document.createElement("textarea");
+  textarea.name = "submissionNote";
+  textarea.rows = 4;
+  textarea.maxLength = 2000;
+  textarea.placeholder = "Type a staff note about this surrender...";
+
+  label.append(labelText, textarea);
+
+  const actions = document.createElement("div");
+  actions.className = "bird-form-actions";
+
+  const submitButton = document.createElement("button");
+  submitButton.type = "submit";
+  submitButton.className = "hero-button";
+  submitButton.textContent = "Add note";
+
+  const status = document.createElement("p");
+  status.className = "form-status";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+
+  actions.append(submitButton);
+  form.append(label, actions, status);
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const noteContent = textarea.value.trim();
+
+    if (!noteContent) {
+      status.textContent = "Enter a note before saving.";
+      textarea.focus();
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Saving...";
+    status.textContent = "Saving note...";
+
+    try {
+      const accessToken = await getDashboardAccessToken();
+      const response = await fetch(
+        `${API_URL}/admin/submissions/${encodeURIComponent(submission.submissionId)}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ note: noteContent })
+        }
+      );
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(
+          result.message || `Submissions API returned ${response.status}`
+        );
+      }
+
+      renderSurrenderDetail(result.submission);
+    } catch (error) {
+      console.error(error);
+      status.textContent = error.message || "Unable to save the note.";
+      submitButton.disabled = false;
+      submitButton.textContent = "Add note";
+    }
+  });
+
+  section.append(form);
+  return section;
 }
 
 function renderAdoptionDetail(submission) {
