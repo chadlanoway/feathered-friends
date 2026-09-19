@@ -1,7 +1,9 @@
 import "./style.css";
 import { renderHeader } from "./components/header.js";
+import { loadBlogPosts } from "./blog.js";
 
 renderHeader();
+loadBlogPosts();
 const root = document.documentElement;
 const hero = document.querySelector(".hero");
 

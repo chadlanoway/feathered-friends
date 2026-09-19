@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2HZZ3EH9V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-P2HZZ3EH9V');
+  </script>
+
   <link rel="shortcut icon" href="./favicon.ico" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +40,7 @@
           for parrots in need.
         </p>
 
-        <a class="hero-button" href="#mission">Meet the flock</a>
+        <a class="hero-button" href="#mission">Read the latest</a>
       </div>
 
       <picture>
@@ -45,20 +55,18 @@
       </div>
     </section>
 
-    <section class="mission" id="mission">
+    <section class="mission blog-home" id="mission" aria-labelledby="blog-heading">
       <img class="mission-logo" src="/images/fflogo.png" alt="Feathered Friends logo" />
 
-      <div class="content-wrapper">
-        <p class="eyebrow">Our mission</p>
+      <div class="content-wrapper blog-intro">
+        <p class="eyebrow">News from the sanctuary</p>
+        <h2 id="blog-heading">The Bird Log</h2>
 
-        <h2>Helping parrots find their way home</h2>
-
-        <p>
-          We rescue, rehabilitate, and rehome parrots while helping
-          people understand the lifelong commitment these remarkable
-          birds require.
-        </p>
       </div>
+      <div id="blog-posts" class="blog-posts" aria-live="polite">
+        <p class="blog-empty">Loading stories…</p>
+      </div>
+
     </section>
   </main>
 

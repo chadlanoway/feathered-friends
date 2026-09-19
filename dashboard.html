@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2HZZ3EH9V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-P2HZZ3EH9V');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/style.css">
@@ -87,6 +97,10 @@
 
                         <a class="dashboard-nav-link" href="#surrenders" data-dashboard-section="surrenders">
                             Surrenders
+                        </a>
+
+                        <a class="dashboard-nav-link" href="#blog" data-dashboard-section="blog">
+                            Blog
                         </a>
 
                         <button id="sign-out-button" class="dashboard-sign-out" type="button">
@@ -420,6 +434,50 @@
                         </header>
 
                         <div id="adoption-detail-content"></div>
+                    </section>
+                </section>
+
+                <section id="dashboard-section-blog" class="dashboard-section" data-dashboard-panel="blog" hidden>
+                    <header class="dashboard-section-header">
+                        <div>
+                            <p class="eyebrow">Website updates</p>
+                            <h1>Blog</h1>
+                            <p>Write a story with text, photos, and YouTube videos. Publish when it is ready.</p>
+                        </div>
+                        <button id="new-blog-post" class="hero-button" type="button">New post</button>
+                    </header>
+                    <p id="blog-dashboard-message" class="submission-message" role="status"></p>
+                    <div id="blog-post-list" class="blog-post-list"></div>
+
+                    <section id="blog-editor" class="bird-form-panel blog-editor" aria-labelledby="blog-editor-heading"
+                        hidden>
+                        <header class="bird-form-header">
+                            <h2 id="blog-editor-heading">New post</h2>
+                            <p>Text can have multiple paragraphs. Add as many blocks as your story needs.</p>
+                        </header>
+                        <form id="blog-form">
+                            <label class="form-field">
+                                <span>Title *</span>
+                                <input name="title" maxlength="140" required>
+                            </label>
+                            <div id="blog-blocks" class="blog-editor-blocks"></div>
+                            <div class="blog-add-buttons" aria-label="Add content">
+                                <button type="button" data-add-blog-block="text" class="form-secondary-button">Add
+                                    text</button>
+                                <button type="button" data-add-blog-block="image" class="form-secondary-button">Add
+                                    image</button>
+                                <button type="button" data-add-blog-block="youtube" class="form-secondary-button">Add
+                                    YouTube video</button>
+                            </div>
+                            <p id="blog-editor-message" role="status"></p>
+                            <div class="bird-form-actions blog-form-actions">
+                                <button type="button" id="cancel-blog-edit"
+                                    class="form-secondary-button">Cancel</button>
+                                <button type="button" id="save-blog-draft" class="form-secondary-button">Save
+                                    draft</button>
+                                <button type="submit" id="publish-blog-post" class="hero-button">Publish</button>
+                            </div>
+                        </form>
                     </section>
                 </section>
 

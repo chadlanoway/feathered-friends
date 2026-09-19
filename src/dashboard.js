@@ -1,4 +1,5 @@
 import { Amplify } from "aws-amplify";
+import { initBlogDashboard } from "./blog-dashboard.js";
 
 import {
   signIn,
@@ -10,6 +11,16 @@ import {
 
 const API_URL =
   "https://7cpncscbj5.execute-api.us-east-1.amazonaws.com";
+
+const blogDashboard = initBlogDashboard({
+  apiUrl: API_URL,
+  getAccessToken: async () => {
+    const session = await fetchAuthSession();
+    const token = session.tokens?.accessToken?.toString();
+    if (!token) throw new Error("Please sign in again.");
+    return token;
+  }
+});
 
 Amplify.configure({
   Auth: {
@@ -262,6 +273,10 @@ dashboardNavigationLinks.forEach((link) => {
 
     if (sectionName === "volunteers") {
       loadVolunteers(currentVolunteerView);
+    }
+
+    if (sectionName === "blog") {
+      blogDashboard.load();
     }
   });
 });
